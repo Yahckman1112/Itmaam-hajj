@@ -1,13 +1,14 @@
-
-import Banner from './hero'
+import Banner from "./hero";
+import Offer from "./offer/Offer";
 
 function Home() {
   return (
     <div>
-      < Banner/>
-
+      <Banner />
+      <Offer />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
+

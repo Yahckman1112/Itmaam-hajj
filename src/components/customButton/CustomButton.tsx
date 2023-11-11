@@ -33,3 +33,12 @@ function CustomButton({ children, className, onClick, type }: BtnProps) {
 }
 
 export default CustomButton;
+// font-size: 59px;
+// font-weight: 700;
+// color: #FFFFFF;
+// letter-spacing: -0.05em;
+
+// font-size: 14px;
+// font-weight: 400;
+// color: #FFFFFF;
+// margin-top: -4px;
