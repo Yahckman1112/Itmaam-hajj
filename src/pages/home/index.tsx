@@ -1,12 +1,13 @@
-import React from 'react';
 
+import Banner from './hero'
 
-function Home(props) {
-    return (
-        <div>
-            Homeh
-        </div>
-    );
+function Home() {
+  return (
+    <div>
+      < Banner/>
+
+    </div>
+  )
 }
 
-export default Home;
+export default Home
