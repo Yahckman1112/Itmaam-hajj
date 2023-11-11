@@ -23,7 +23,7 @@ function Offer() {
     },
   ];
   return (
-    <div className="min-h-screen text-center pt-10 px-5 md:p-10 ">
+    <div className="min-h-screen text-center pt-10 px-5 md:p-10 lg:px-32 ">
       <p className="font-bold text-[#2d2c2c]">Special Offers</p>
       <p className="text-xl italic text-[#929191]">
         Hajj and Umrah Special Offers
