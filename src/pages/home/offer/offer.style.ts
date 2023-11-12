@@ -6,3 +6,8 @@ export const IntroCard = styled.div`
   background-size: cover;
   /* height: 70vh; */
 `;
+
+export const OfferDiv = styled.div`
+  display: grid;
+  grid-template-columns: 20% 80%;
+`;
