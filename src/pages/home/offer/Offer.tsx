@@ -125,6 +125,9 @@ function Offer() {
           </div>
         </div>
       </section>
+
+
+  
     </div>
   );
 }
