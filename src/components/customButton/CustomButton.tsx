@@ -34,6 +34,21 @@ function CustomButton({ children, className, onClick, type }: BtnProps) {
 
 export default CustomButton;
 
+// #E5EFFF
 
 
 
+
+// font-weight: 700;
+// color: #2d2c2c;
+// text-transform: uppercase;
+
+
+// font-family: 'Open Sans', sans-serif;
+// font-size: 14px;
+// line-height: 2;
+// font-weight: 400;
+// color: #929191;
+// -webkit-font-smoothing: antialiased;
+// -webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
+// text-shadow: rgba(0,0,0,.01) 0 0 1px;
