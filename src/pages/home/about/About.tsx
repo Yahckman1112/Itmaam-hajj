@@ -121,7 +121,7 @@ function About() {
 
                 <div className="text-sm leading-7 md:leading-10 text-[#929191]  mt-5">
                   {packages.list.map((item: any, i: number) => (
-                    <p key={i}>
+                    <p key={i} className="mb-5">
                       {item.available ? (
                         <span className="font-bold mr-2 text-[#007bffe0] border border-solid p-2 px-3 rounded-full">
                           &#10003;
