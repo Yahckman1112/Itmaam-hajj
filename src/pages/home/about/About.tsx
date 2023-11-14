@@ -105,7 +105,7 @@ function About() {
           Hajj And Umrah Packages
         </p>
 
-        <div className="md:grid md:grid-cols-2 grid-cols-3 gap-7 py-7  ">
+        <div className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-7 py-7  ">
           {cardInfo.map((packages: any, i: number) => (
             <div
               className="border border-solid border-[#E5EFFF] mb-4 md:mb-0  rounded-lg"
