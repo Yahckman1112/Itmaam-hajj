@@ -1,4 +1,4 @@
-import styles from "./client.module.scss";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
