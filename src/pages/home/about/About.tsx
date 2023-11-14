@@ -2,8 +2,14 @@ import img1 from "../../../assets/about1.jpg";
 
 import CustomButton from "../../../components/customButton/CustomButton";
 
+interface PackageInfo{
+  package: string;
+  price:number;
+  list: {name:string, available:boolean}[]
+}
+
 function About() {
-  const cardInfo = [
+  const cardInfo:PackageInfo[] = [
     {
       package: "Umrah",
       price: 200,
@@ -14,7 +20,7 @@ function About() {
         { name: "   Land Transportation", available: true },
         { name: "Accomodation", available: true },
         { name: "Lunch", available: true },
-        { name: "Dinner", available: true },
+        { name: "Dinner", available: false },
       ],
     },
     {
@@ -45,8 +51,8 @@ function About() {
     },
   ];
   return (
-    <div className="min-h-screen max-w-[100%] px-5 md:px-32 py-12">
-      <section className="md:grid grid-cols-2 gap-10">
+    <div className="min-h-screen max-w-[100%] px-5 md:px-16 lg:px-32 py-12">
+      <section className="lg:grid grid-cols-2 gap-10">
         <div>
           <img src={img1} alt="" className="object-cover rounded-lg" />
         </div>
@@ -99,10 +105,10 @@ function About() {
           Hajj And Umrah Packages
         </p>
 
-        <div className="md:grid grid-cols-3 gap-7 py-7  ">
+        <div className="md:grid md:grid-cols-2 grid-cols-3 gap-7 py-7  ">
           {cardInfo.map((packages: any, i: number) => (
             <div
-              className="border border-solid border-red-700  rounded-lg"
+              className="border border-solid border-[#E5EFFF] mb-4 md:mb-0  rounded-lg"
               key={i}
             >
               <div className="bg-[#2d2c2c] rounded-t-lg px-5  pt-6 py-11">
@@ -115,7 +121,7 @@ function About() {
               </div>
 
               <div className=" px-5 ">
-                <button className="bg-[#E5EFFF] font-semibold hover:scale-95 hover:bg-[#ffc107] transform duration-700 transition-transform -mt-10  px-8 py-4 rounded-lg">
+                <button className="bg-[#E5EFFF]  font-semibold hover:scale-95 hover:bg-[#ffc107] transform duration-700 transition-transform -mt-10  px-8 py-4 rounded-lg">
                   Get Started
                 </button>
 
