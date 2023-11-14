@@ -10,6 +10,8 @@
   
 }
 
+/* swipper view */
+
 .swiper-container {
   width: 480px;
 
@@ -24,6 +26,9 @@
         width: 768px;
     }
   }
+/* sweeper ledt and right design */
+
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
