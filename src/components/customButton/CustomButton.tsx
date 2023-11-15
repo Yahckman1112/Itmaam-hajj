@@ -35,12 +35,17 @@ function CustomButton({ children, className, onClick, type }: BtnProps) {
 export default CustomButton;
 
 // #E5EFFF
-
+ // #6610f2
 // #350a4e
 
 
-// font-family: 'Open Sans', sans-serif;
-//     font-size: 14px;
-//     font-weight: 400;
-//     background: #FFFFFF;
-//     color: #a5a5a5;
+// #007bff
+
+
+// nt-family: 'Open Sans', sans-serif;
+//     font-size: 13px;
+//     font-weight: 600;
+//     color: #FFFFFF;
+//     text-transform: uppercase;
+//     padding-bottom: 10px;
+//     padding-top: 10px;

@@ -7,7 +7,7 @@ export interface PublicLayout{
     children?: React.ReactNode;
 } 
 
-function PublicLayout({header=true, footer=false, children}: PublicLayout) {
+function PublicLayout({header=false, footer=false, children}: PublicLayout) {
   return (
     <div>
         {header && < TopBar/>}
