@@ -1,4 +1,5 @@
 import React from 'react'
+import TopBar from '../components/appHeader/TopBar';
 
 export interface PublicLayout{
     header?: boolean;
@@ -6,10 +7,10 @@ export interface PublicLayout{
     children?: React.ReactNode;
 } 
 
-function PublicLayout({header=false, footer=false, children}: PublicLayout) {
+function PublicLayout({header=true, footer=false, children}: PublicLayout) {
   return (
     <div>
-        {header && 'Header'}
+        {header && < TopBar/>}
         {children}
         {footer && 'footer'}
     </div>
