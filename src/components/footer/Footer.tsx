@@ -52,6 +52,8 @@ function Footer() {
     },
   ];
   return (
+    <div>
+
     <div className="bg-[#31124b] min-h-[85vh] md:grid md:grid-cols-2  lg:grid-cols-4 text-white font-sans px-5 md:px-16 gap-10 py-24">
       <div>
         <p className="font-extrabold  text-2xl md:text-4xl uppercase mb-7">
@@ -66,7 +68,7 @@ function Footer() {
 
       {footerData.map((item: any, i: number) => (
         <div key={i}>
-          <p className="  font-bold uppercase mb-7 md:text-lg text-[15px] mt-7 pt-3 ">
+          <p className="  font-bold uppercase mb-7 md:text-lg text-[15px] mt-7 md:mt-0 pt-3 ">
             {item.title}
           </p>
 
@@ -82,6 +84,10 @@ function Footer() {
           ))}
         </div>
       ))}
+    </div>
+      <div className="bg-black text-center text-white w-full py-4">
+      © 2023 Al-Itmaam. All right reserved.
+      </div>
     </div>
   );
 }
