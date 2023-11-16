@@ -21,7 +21,7 @@ const {headerData, inView, isOpen, handleDrawer} = useAppHeader()
       <div
         className={` 
         bg-[#31124b8f] 
-         py-4 lg:py-12  px-5 md:px-14 flex justify-between fixed w-full  text-[#f4f4f8] font-sans uppercase ${
+         py-4 lg:py-12  px-5 md:px-14 flex justify-between fixed w-full  text-[#f4f4f8] font-sans uppercase z-40 ${
           inView ? "lg:py-4 -mb-32 " : ""
         }`}
       >
