@@ -37,15 +37,7 @@ export default CustomButton;
 // #E5EFFF
  // #6610f2
 // #350a4e
-
-
 // #007bff
+// #31124b
 
 
-// nt-family: 'Open Sans', sans-serif;
-//     font-size: 13px;
-//     font-weight: 600;
-//     color: #FFFFFF;
-//     text-transform: uppercase;
-//     padding-bottom: 10px;
-//     padding-top: 10px;

@@ -11,39 +11,46 @@ import ClientsCard from "./ClientsCard";
 
 // Import Swiper core and required modules
 
+interface ICustomerInfo{
+  name:string
+  date:string
+  remark: string
+  comment:string
+}
+
 
 function Clients() {
-  const customerInfo = [
+  const customerInfo: ICustomerInfo[] = [
     {
-      name: "Wale Joe",
+      name: "Toheeb Sadiq",
       date: "27th May, 2023",
       remark: "Best Holiday Ever",
       comment: ` Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
             fugit voluptatum voluptatibus nihil praesentium sunt.`,
     },
     {
-      name: "Wale Joe",
+      name: "Mutiu Waheed",
       date: "27th May, 2023",
       remark: "Best Holiday Ever",
       comment: ` Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
             fugit voluptatum voluptatibus nihil praesentium sunt.`,
     },
     {
-      name: "Wale Joe",
+      name: "Saheed Leye",
       date: "27th May, 2023",
       remark: "Best Holiday Ever",
       comment: ` Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
             fugit voluptatum voluptatibus nihil praesentium sunt.`,
     },
     {
-      name: "Wale Joe",
+      name: "Olawale Qaasim",
       date: "27th May, 2023",
       remark: "Best Holiday Ever",
       comment: ` Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
             fugit voluptatum voluptatibus nihil praesentium sunt.`,
     },
     {
-      name: "Wale Joe",
+      name: "Taoheed Balqis",
       date: "27th May, 2023",
       remark: "Best Holiday Ever",
       comment: ` Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse

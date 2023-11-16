@@ -17,9 +17,12 @@ const {headerData, inView, isOpen, handleDrawer} = useAppHeader()
       <div className={`${inView ? "hidden" : ""}`}>
         <TopBar />
       </div>
+
       <div
-        className={` bg-[#6710f29f] py-4 lg:py-12  px-5 md:px-14 flex justify-between fixed w-full  text-[#f4f4f8] font-sans uppercase ${
-          inView ? "py-4 -mb-32" : ""
+        className={` 
+        bg-[#31124b8f] 
+         py-4 lg:py-12  px-5 md:px-14 flex justify-between fixed w-full  text-[#f4f4f8] font-sans uppercase ${
+          inView ? "lg:py-4 -mb-32 " : ""
         }`}
       >
         <div className="font-extrabold  text-2xl md:text-4xl">Al-ITmaam</div>
@@ -35,9 +38,9 @@ const {headerData, inView, isOpen, handleDrawer} = useAppHeader()
           ))}
 
         </div>
-        <div>
+        
           <TfiMenu className='lg:hidden ' size={25} onClick={handleDrawer} />
-        </div>
+       
       </div>
       <Drawer
                 open={isOpen}

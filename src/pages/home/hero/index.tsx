@@ -14,7 +14,7 @@ function Banner() {
 
       <BannerDiv
         style={{
-          backgroundImage: `linear-gradient(to bottom, #6710f25e, #6710f22e), url(${banner})`,
+          backgroundImage: `linear-gradient(to bottom, #31124ba5, #31124b82), url(${banner})`,
         }}
         className="  "
       >
