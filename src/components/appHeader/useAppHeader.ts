@@ -20,8 +20,8 @@ function useAppHeader() {
       path: "/about",
     },
     {
-      name: "Offer",
-      path: "#",
+      name: "Packages",
+      path: "/packages",
     },
     {
       name: "News",

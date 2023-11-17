@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import banner from "../../assets/about_background.jpg";
+import banner from "../../assets/packagesBg.jpg";
 import AppHeader from "../appHeader/AppHeader";
 interface IPages{
     pageName?:string;
@@ -20,7 +20,7 @@ function CustomBanner({pageName, bgImage}:IPages) {
 
       <BannerDiv
         style={{
-          backgroundImage: ` url(${ bgImage || banner})`,
+          backgroundImage: ` linear-gradient(to bottom, #31124b39, #31124b65), url(${ bgImage || banner})`,
         }}
       >
         <AppHeader />
