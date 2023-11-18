@@ -3,7 +3,8 @@ import Home from "../pages/home";
 import { ABOUT, NOT_FOUND, PACKAGES, REGISTER } from "./routes";
 import About from "../pages/about/About";
 import Packages from "../pages/packages/Packages";
-import Register from "../pages/register/register";
+import Register from "../pages/register/Register";
+
 function Router() {
   return (
     <div>
