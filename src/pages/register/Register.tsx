@@ -39,7 +39,7 @@ function Register() {
       <div className=" p-5 md:p-20 ">
         <div className="  lg:grid grid-cols-2 shadow-xl gap-5 md:p-5 min-h-[70vh]">
           <div className=" rounded-lg">
-            <img src={formSide} alt="" />
+            <img src={formSide} alt="" className=" object-cover"/>
           </div>
 
           <div className="p-5">
@@ -47,14 +47,12 @@ function Register() {
               Apply Now
             </p>
             <p className="text-lg font-normal text-center text-[#929191] my-7">
-              Give us the Information to get to you{" "}
+              Let's Get Intouch with You{" "}
             </p>
 
             <form  onSubmit={formik.handleSubmit}>
               <div className="md:grid grid-cols-2 gap-5">
-                <>
-                
-                </>
+            
                 <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
                   <Input
                     placeholder="First Name"
@@ -77,10 +75,10 @@ function Register() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
-                </div>
                      {formik.touched.lastName && formik.errors.lastName && (
             <p className={'text-sm text-red-500'}>{formik.errors.lastName}</p>
           )}
+                </div>
               </div>
               <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
                 <Input
