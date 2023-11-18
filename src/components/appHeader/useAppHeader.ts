@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useCheckMobileScreen from "../../hooks/useCheckMobileScreen";
+import { REGISTER } from "../../routes/routes";
 
 interface IheaderData {
   name: string;
@@ -34,7 +35,7 @@ function useAppHeader() {
 
   isMobile? {
       name: "Register",
-      path: "#",
+      path:REGISTER ,
     }: {
       name: " ",
       path: "#",

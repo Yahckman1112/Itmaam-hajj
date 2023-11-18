@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import {FaTwitter, FaPhoneAlt, FaFacebookF, FaInstagram , FaLinkedinIn   } from 'react-icons/fa'
+import { REGISTER } from "../../routes/routes"
 
 function TopBar() {
   return (
@@ -13,7 +14,7 @@ function TopBar() {
         </div>
         <div className="text-[10px] font-sans">
             <Link to={'#'}>LOGIN</Link> <span className="px-1">|</span>    
-            <Link to={'#'}>REGISTER</Link>  
+            <Link to={REGISTER}>REGISTER</Link>  
         </div>
     </div>
   )
