@@ -24,7 +24,7 @@ function CustomButton({ children, className, onClick, type }: BtnProps) {
       className={
         className
           ? className
-          : " text-base text-white font-bold uppercase px-14 py-3 hover:scale-110 transition-transform duration-500 transform  rounded-full "
+          : " text-base text-white font-bold uppercase px-14 py-3 hover:scale-75 transition-transform duration-500 transform  rounded-full "
       }
     >
       {children}

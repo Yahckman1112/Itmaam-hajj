@@ -1,6 +1,7 @@
 import CustomBanner from "../../components/customBanner/CustomBanner";
 import packageBg from "../../assets/packagesBg.jpg";
 import img1 from "../../assets/3.jpg";
+import img2 from "../../assets/4.jpg";
 import MakkahHotel from "../../assets/hotel-1.png";
 import MadinahHotel from "../../assets/hotel.png";
 // @ts-ignore
@@ -18,7 +19,7 @@ function Packages() {
       totalSpace: 160,
     },
     {
-      img: img1,
+      img: img2,
       name: "Hajj Package",
       time: 20,
       currentPrice: 15000,
@@ -36,7 +37,7 @@ function Packages() {
       totalSpace: 160,
     },
     {
-      img: img1,
+      img: img2,
       name: "Umrah and Turkey Tour",
       time: 20,
       currentPrice: 15000,
@@ -54,7 +55,7 @@ function Packages() {
       totalSpace: 160,
     },
     {
-      img: img1,
+      img: img2,
       name: "7 days Umrah",
       time: 20,
       currentPrice: 15000,

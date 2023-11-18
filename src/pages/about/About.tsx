@@ -1,7 +1,7 @@
 import CustomBanner from "../../components/customBanner/CustomBanner";
 import img from "../../assets/intro.png";
 import CustomButton from "../../components/customButton/CustomButton";
-import blogBg from "../../assets/add.jpg";
+import blogBg from "../../assets/3.jpg";
 import milestone1 from "../../assets/milestone_1.png";
 import milestone3 from "../../assets/milestone_3.png";
 import milestone4 from "../../assets/milestone_4.png";
@@ -77,7 +77,7 @@ function About() {
 
         <section
           className="my-5 md:after:my-10 text-white px-6 md:px-12  lg:px-24 py-20 md:10 w-full min-h-[50vh] bg-no-repeat bg-cover  bg-center"
-          style={{ backgroundImage: `url(${blogBg})` }}
+          style={{ backgroundImage: ` linear-gradient(to right , #000000ae, #000000be) , url(${blogBg})` }}
         >
           <p className=" uppercase font-bold text-4xl leading-loose">Madinah</p>
           <p>

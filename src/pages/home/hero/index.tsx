@@ -1,5 +1,5 @@
 import { BannerDiv } from "./hero.style";
-import banner from "../../../assets/banner.jpg";
+import banner from "../../../assets/packagesBg.jpg";
 import CustomButton from "../../../components/customButton/CustomButton";
 import AppHeader from "../../../components/appHeader/AppHeader";
 

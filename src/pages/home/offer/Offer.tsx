@@ -1,7 +1,7 @@
-import intro1 from "../../../assets/intro_1.jpg";
-import intro2 from "../../../assets/intro_2.jpg";
-import intro3 from "../../../assets/intro_3.jpg";
-import feature from "../../../assets/feture.jpg";
+import intro1 from "../../../assets/4.jpg";
+import intro2 from "../../../assets/4.jpg";
+import intro3 from "../../../assets/3.jpg";
+import feature from "../../../assets/3.jpg";
 import luggage from "../../../assets/svg/luggage.svg";
 import customerService from "../../../assets/svg/customer-service.svg";
 import hotel from "../../../assets/svg/hotel.svg";
@@ -90,7 +90,7 @@ function Offer() {
       <section
         className="min-h-screen bg-cover bg-center p-4 py-20 md:p-28 "
         style={{
-          backgroundImage: `linear-gradient(to bottom right, #ffc107, #6710f241), url(${feature})`,
+          backgroundImage: `linear-gradient(to bottom right, #ffc107ad, #6710f241), url(${feature})`,
         }}
       >
         <div className="bg-white py-5 px-5 md:px-10  ">
