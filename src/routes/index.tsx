@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/home";
-import { ABOUT, NOT_FOUND, PACKAGES, REGISTER } from "./routes";
+import { ABOUT, CONTACT, NOT_FOUND, PACKAGES, REGISTER } from "./routes";
 import About from "../pages/about/About";
 import Packages from "../pages/packages/Packages";
 import Register from "../pages/register/Register";
+import Contact from "../pages/contact/Contact";
 
 function Router() {
   return (
@@ -13,6 +14,7 @@ function Router() {
         <Route path={ABOUT} element={<About />} />
         <Route path={PACKAGES} element={<Packages />} />
         <Route path={REGISTER} element={<Register />} />
+        <Route path={CONTACT} element={<Contact />} />
         <Route
           path={NOT_FOUND}
           element={<div className="text-4xl text-red-600"> PAGE NOT FOUND</div>}

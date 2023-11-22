@@ -51,7 +51,7 @@ function Register() {
             </p>
 
             <form  onSubmit={formik.handleSubmit}>
-              <div className="md:grid grid-cols-2 gap-5">
+              <div className=" grid-cols-2 gap-5">
             
                 <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
                   <Input
@@ -62,10 +62,10 @@ function Register() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
+                </div>
                      {formik.touched.firstName && formik.errors.firstName && (
             <p className={'text-sm text-red-500'}>{formik.errors.firstName}</p>
           )}
-                </div>
                 <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
                   <Input
                     placeholder="Last Name"
@@ -75,10 +75,10 @@ function Register() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
+                </div>
                      {formik.touched.lastName && formik.errors.lastName && (
             <p className={'text-sm text-red-500'}>{formik.errors.lastName}</p>
           )}
-                </div>
               </div>
               <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
                 <Input
