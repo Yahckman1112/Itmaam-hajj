@@ -48,7 +48,7 @@ const {headerData, inView, isOpen, handleDrawer} = useAppHeader()
                 direction='right'
                 className='bg-black'
             >
-                <div className="bg-black  h-full bg-gradient-to-r from-[#ffc107] to-[#007bffe0] text-white text-center pt-36   text-2xl  font-pacifico">
+                <div className="bg-[#31124b]  h-full text-white text-center pt-36   text-2xl  font-pacifico">
                   {/* <div className="flex m-auto"> < IoLogoAppleAr/> </div> */}
                   {headerData.map((item:any, i:number)=>(
 

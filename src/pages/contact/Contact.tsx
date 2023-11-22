@@ -71,6 +71,9 @@ function Contact() {
           ))}
         </div>
         <div className=" col-span-2">
+        <p className="text-3xl font-bold text-center leading-9">
+              Get In Touch
+            </p>
           <form action="" onSubmit={formik.handleSubmit}>
             <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
               <Input
