@@ -4,7 +4,7 @@ import { LoginInput } from "./admin.style";
 function Admin() {
   return (
     <div
-      className="h-screen p-7  bg-[#F1F6F9] m-auto flex justify-center items-center"
+      className="h-screen p-5  bg-[#F1F6F9] m-auto flex justify-center items-center"
       //   style={{ backgroundImage: `url(${banner})` }}
     >
       <LoginContainer className="px-10 py-12 bg-white  border-x-0 border-y-0  max-w-[450px] font-[open-sans] rounded-lg border border-solid border-t-[5px] border-[#1A8F4A]">
