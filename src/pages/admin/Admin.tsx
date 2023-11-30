@@ -3,12 +3,15 @@ import { Label, LoginContainer } from "./admin.style";
 import { LoginInput } from "./admin.style";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Swal from "sweetalert2";
+import http from "../../services/httpService";
+import { useEffect } from "react";
 
 function Admin() {
   const loginValidate = () => {
     return Yup.object({
       email: Yup.string().required("enter your valid email").email(),
-      password: Yup.string().required("Let us Know ur name"),
+      password: Yup.string().required("Enter ur valid password"),
     });
   };
 
@@ -19,8 +22,34 @@ function Admin() {
     },
     validationSchema: loginValidate(),
 
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        // console.log(values);
+        const { data: jwt } = await http.post(
+          "http://localhost:5000/api/auth",
+          values
+        );
+        localStorage.setItem("token", jwt);
+        console.log(jwt);
+
+        Swal.fire({
+          icon: "success",
+          title: "Successful",
+          text: "Loged in successfully",
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+      } catch (error:any) {
+        console.log(error);
+        
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response?.data || "Authentication failed",
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+      }
     },
   });
 
@@ -42,9 +71,11 @@ function Admin() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-                       {formik.touched.email && formik.errors.email && (
-            <p className={'text-xs mt-2 text-red-500'}>{formik.errors.email}</p>
-          )}
+            {formik.touched.email && formik.errors.email && (
+              <p className={"text-xs mt-2 text-red-500"}>
+                {formik.errors.email}
+              </p>
+            )}
           </div>
 
           <div className="mb-12 ">
@@ -57,9 +88,11 @@ function Admin() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-                       {formik.touched.password && formik.errors.password && (
-            <p className={'text-xs mt-2 text-red-500'}>{formik.errors.password}</p>
-          )}
+            {formik.touched.password && formik.errors.password && (
+              <p className={"text-xs mt-2 text-red-500"}>
+                {formik.errors.password}
+              </p>
+            )}
           </div>
           <p className="text-[#1A8F4A] text-right cursor-pointer font-semibold text-base">
             Forgot Password?{" "}
