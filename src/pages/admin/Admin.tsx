@@ -4,10 +4,12 @@ import { LoginInput } from "./admin.style";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
-import http from "../../services/httpService";
-import { useEffect } from "react";
+// import http from "../../services/httpService";
+import { useNavigate } from "react-router-dom";
+
 
 function Admin() {
+  const navigate = useNavigate()
   const loginValidate = () => {
     return Yup.object({
       email: Yup.string().required("enter your valid email").email(),
@@ -25,20 +27,24 @@ function Admin() {
     onSubmit: async (values) => {
       try {
         // console.log(values);
-        const { data: jwt } = await http.post(
-          "http://localhost:5000/api/auth",
-          values
-        );
-        localStorage.setItem("token", jwt);
-        console.log(jwt);
+        // const { data: jwt } = await http.post(
+        //   "http://localhost:5000/api/auth",
+        //   values
+        // );
+        // localStorage.setItem("token", jwt);
+        // console.log(jwt);
 
-        Swal.fire({
-          icon: "success",
-          title: "Successful",
-          text: "Loged in successfully",
-          showCancelButton: true,
-          showConfirmButton: false,
-        });
+        // Swal.fire({
+        //   icon: "success",
+        //   title: "Successful",
+        //   text: "Loged in successfully",
+        //   showCancelButton: true,
+        //   showConfirmButton: false,
+        // });
+
+        navigate('/user')
+
+        
       } catch (error:any) {
         console.log(error);
         
