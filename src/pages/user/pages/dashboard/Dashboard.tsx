@@ -1,11 +1,11 @@
 import React from "react";
 
 function Dashboard() {
-  return <div>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium itaque officiis quasi soluta ad, saepe fugit officia nihil optio a illum, eum nulla neque numquam iste facilis ipsum culpa hic perspiciatis possimus accusantium minus commodi. Quae quasi saepe dolores culpa eius. Praesentium placeat quos impedit voluptatum, excepturi quisquam corrupti neque ipsum iste architecto eaque sint ullam nulla velit dolor modi, nam distinctio ducimus quia illo doloremque odit laboriosam porro! Obcaecati veritatis quidem minima temporibus sapiente. Quibusdam magnam aut voluptatem et similique, illum perferendis ex molestiae labore ab sapiente quisquam tempore maxime quo! Reiciendis, animi nemo possimus laborum obcaecati tenetur ab harum vel neque et a vero iste minima impedit libero quam temporibus autem perspiciatis odit, numquam hic? Ad repellendus modi dicta maiores perferendis. Omnis soluta id accusantium impedit incidunt odit quasi, alias quia nam expedita placeat, dolorum sint vero reiciendis consequuntur sed nemo eius delectus accusamus sunt voluptates officiis odio vitae! Distinctio cum pariatur nihil. Beatae doloribus ea aperiam exercitationem harum adipisci vero veritatis ipsum dolor, dignissimos impedit, sapiente corporis. Esse, enim qui laudantium earum eveniet distinctio deserunt omnis corporis dolore incidunt aspernatur cumque quam, expedita quasi perferendis nemo delectus beatae quis rem laboriosam vel vitae iure? Itaque, minima quam beatae unde, natus totam nihil magni consectetur delectus rem voluptas ducimus eligendi nulla cum aperiam suscipit, expedita ad. Nisi, laboriosam voluptatum dolores recusandae ut expedita sint, exercitationem earum facere quod laudantium reiciendis commodi voluptates temporibus? Non magni ducimus molestias omnis officia. Laboriosam illum itaque ut suscipit velit? Repudiandae provident quam consequuntur recusandae officia autem, omnis quisquam impedit quae unde cupiditate aliquam vel illum fugit vero ea excepturi pariatur? Voluptates iure expedita sed corporis maxime quaerat provident ipsa dignissimos consequuntur, error, totam, reprehenderit id? Veritatis asperiores unde commodi officia earum. Fugit enim maiores dolore minima amet, reiciendis, nisi, ratione dolorum tenetur quas facilis beatae nihil numquam reprehenderit dicta? Nostrum aliquid mollitia beatae repellendus numquam inventore excepturi et, quaerat corrupti, enim exercitationem. Sint omnis repellendus incidunt optio, reprehenderit a labore dolor? Aspernatur at eius nisi iusto cupiditate molestias provident voluptatibus iste accusamus minima non optio sequi veritatis, expedita a. Perferendis magni beatae illo ex, eius, necessitatibus sint repudiandae quam nesciunt, recusandae voluptates cumque explicabo doloribus tenetur hic quis architecto expedita incidunt quaerat eum. Modi voluptate dolorum minus quas ipsam, cum nobis ea tempore veniam esse temporibus, quasi ratione id explicabo assumenda laboriosam expedita molestiae iste doloremque. Eius, cumque veniam. Aliquam, magnam qui.
-    </p>
-  </div>;
+  return (
+    <div>
+      <p>Dashboard</p>
+    </div>
+  );
 }
 
 export default Dashboard;

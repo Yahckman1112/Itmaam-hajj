@@ -2,7 +2,7 @@
 
 import { Route, Routes } from 'react-router-dom';
 import SideNav from './components/sideNav';
-import Dashboard from './pages/dashboard/dashboard';
+import Dashboard from './pages/dashboard/Dashboard';
 import { FaAccessibleIcon } from 'react-icons/fa';
 
 function User() {
@@ -13,7 +13,7 @@ function User() {
       </div>  
       <div className='block lg:hidden'>< FaAccessibleIcon /> </div>
 
-      <div className='max-h-screen overflow-y-scroll  p-6 bg-[#FCFFF5]'>
+      <div className='max-h-screen overflow-y-scroll flex-1 p-6 bg-[#FCFFF5]'>
        < Routes>
        < Route path='/' element={< Dashboard />} />
        </Routes>
