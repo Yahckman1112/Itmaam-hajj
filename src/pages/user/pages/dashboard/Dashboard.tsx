@@ -5,6 +5,7 @@ import { MdEventSeat } from "react-icons/md";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import NotificationCard from "../../../../components/notificationCard/NotificationCard";
+import AppTable from "./../../../../components/appTable/AppTable";
 
 type ValuePiece = Date | null;
 
@@ -90,7 +91,7 @@ function Dashboard() {
         ))}
       </section>
 
-      <section className="grid grid-cols-3 gap-10 py-8">
+      <section className="lg:grid grid-cols-3 gap-10 py-8">
         <div className=" col-span-2 bg-white p-5 rounded-md shadow-md">
           <p className="#161E03 text-xl font-semibold mb-5 ">Notification</p>
           {notifications.map((item: any, i: number) => (
@@ -99,16 +100,20 @@ function Dashboard() {
               notification={item.body}
               latest={item.latest}
               key={i}
-       
             />
           ))}
         </div>
         <div className="bg-white p-2 shadow-md rounded-md">
           <p className="#161E03 text-xl font-semibold mb-5 ">Calender</p>
-          <div>
+          <div className="mt-6">
             <Calendar onChange={setDateValue} value={dateValue} />
           </div>
         </div>
+      </section>
+
+      <section>
+        <p className="text-[#161E03] text-2xl font-bold  ">Admin List</p>
+        <AppTable />
       </section>
     </div>
   );
