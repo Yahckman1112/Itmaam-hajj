@@ -41,6 +41,7 @@ function Admin() {
         //   showCancelButton: true,
         //   showConfirmButton: false,
         // });
+console.log(values);
 
         navigate('/user')
 
