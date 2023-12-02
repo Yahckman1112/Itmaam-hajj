@@ -13,7 +13,7 @@ function TopBar() {
             <Link to='#' className="pt-1 ml-6 hover:text-[#fd7e14]"> < FaLinkedinIn  size={11}  /> </Link>          
         </div>
         <div className="text-[10px] font-sans">
-            <Link to={'#'}>LOGIN</Link> <span className="px-1">|</span>    
+            <Link to={'/admin'}>LOGIN</Link> <span className="px-1">|</span>    
             <Link to={REGISTER}>REGISTER</Link>  
         </div>
     </div>
