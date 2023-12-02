@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 
-
+export const TableHeader = styled.th`
+&:last-child{
+    border-top-right-radius: 5px;
+}
+`
 
 export const TableRow = styled.tr`
   &:nth-child(odd) {

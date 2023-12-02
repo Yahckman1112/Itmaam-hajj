@@ -13,7 +13,34 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 function Dashboard() {
   const [dateValue, setDateValue] = useState<Value>(new Date());
-
+  const tableData = [
+    {
+      fullname:'Adeniran Yaqub',
+      email:'adeniranajibade1212@gmail.com',
+      role:'Treaseurer'
+    },
+    {
+      fullname:'Adeniran Yaqub',
+      email:'adeniranajibade1212@gmail.com',
+      role:'Treaseurer'
+    },
+    {
+      fullname:'Adeniran Yaqub',
+      email:'adeniranajibade1212@gmail.com',
+      role:'Treaseurer'
+    },
+    {
+      fullname:'Adeniran Yaqub',
+      email:'adeniranajibade1212@gmail.com',
+      role:'Treaseurer'
+    },
+  ]
+  const tableHeader = [
+    { label: "Fullname", key: "fullname" },
+    { label: "Email", key: "email" },
+    { label: "Role", key: "role" },
+    { label: "Role", key: "role" },
+  ];
   const notifications = [
     {
       title: " Registration for winter semeester starts",
@@ -113,7 +140,7 @@ function Dashboard() {
 
       <section>
         <p className="text-[#161E03] text-2xl font-bold  ">Admin List</p>
-        <AppTable />
+        <AppTable tableHeader={tableHeader} showSerialNumber tableData={tableData} />
       </section>
     </div>
   );
