@@ -1,27 +1,37 @@
 import React from "react";
-import { Centered, CloseBtn, DarkBg, Header, Modal, ModalContent, ModalHeader } from "./customModal.style";
+import {
+  Centered,
+  CloseBtn,
+  DarkBg,
+  Header,
+  Modal,
+  ModalContent,
+  
+} from "./customModal.style";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 interface ModalProps {
   setIsOpen?: any;
+  header?: string;
+  children: React.ReactNode
+
 }
-function CustomModal({ setIsOpen }: ModalProps) {
+function CustomModal({setIsOpen, header, children}:ModalProps) {
   return (
     <div>
-      <DarkBg onClick={() => setIsOpen(false)}>
+      <DarkBg >
         <Centered>
           <Modal>
-            <ModalHeader>
-              {" "}
-              <Header>This is Header</Header>{" "}
-            </ModalHeader>
-
-            < CloseBtn onClick={()=>setIsOpen(false)}>
-            close
-            </CloseBtn>
+            <div className="flex justify-between">
+              <Header>{header}</Header>{" "}
+              <CloseBtn onClick={() => setIsOpen(false)}>
+                <IoCloseCircleOutline />
+              </CloseBtn>
+            </div>
 
             <ModalContent>
-                Are u sure of what u are doing?
-            </ModalContent>
+            {children}
+              </ModalContent>
           </Modal>
         </Centered>
       </DarkBg>

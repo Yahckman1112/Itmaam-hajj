@@ -4,14 +4,13 @@ import img2 from "./../../../../assets/4.jpg";
 import ProgressBar from "react-progressbar";
 import MakkahHotel from "./../../../../assets/hotel-1.png";
 import MadinahHotel from "./../../../../assets/hotel.png";
-import { FaAccessibleIcon } from "react-icons/fa";
 import { BsUpload } from "react-icons/bs";
 import CustomModal from "../../../../components/modal/CustomModal";
 import { useState } from 'react';
 
 
 function Packages() {
-  const [openModa, setOpenModal]= useState(false)
+  const [openModal, setOpenModal]= useState(false)
   const packageData = [
     {
       img: img1,
@@ -153,7 +152,9 @@ function Packages() {
       <button className='' onClick={() => setOpenModal(true)}>
         Open Modal
       </button>
-{openModa && < CustomModal setIsOpen={setOpenModal}/>}
+{openModal && < CustomModal header="Packages"  setIsOpen={setOpenModal}>
+  are u sure u wanna do this
+  </CustomModal>}
       {/* < CustomModal/> */}
     </div>
   );
