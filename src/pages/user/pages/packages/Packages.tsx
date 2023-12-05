@@ -85,10 +85,10 @@ function Packages() {
   return (
     <div className="w-[100%]">
       <div className="flex justify-between">
-        <p className="text-3xl font-bold text-[#1A8F4A]">Resources</p>
+        <p className="md:text-3xl text-2xl font-bold text-[#1A8F4A]">Resources</p>
 
         <div
-          className="flex px-7 py-4 cursor-pointer rounded-md text-[#138951] text-base font-medium"
+          className="flex px-3 md:px-7 py-2 md:py-4 cursor-pointer rounded-md text-[#138951] text-base font-medium"
           style={{ border: "1px solid #DADADA" }}
           onClick={() => setIsOpen(true)}
         >
