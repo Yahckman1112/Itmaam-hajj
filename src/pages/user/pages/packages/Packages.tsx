@@ -6,11 +6,44 @@ import MakkahHotel from "./../../../../assets/hotel-1.png";
 import MadinahHotel from "./../../../../assets/hotel.png";
 import { BsUpload } from "react-icons/bs";
 import CustomModal from "../../../../components/modal/CustomModal";
-import { useState } from 'react';
+import { useState } from "react";
+import { Input, Label, Select } from "./package.styles";
 
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 function Packages() {
-  const [openModal, setOpenModal]= useState(false)
+  // const [openModal, setOpenModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const validatePackage = () => {
+    return Yup.object({
+      package: Yup.string().required("Choose a Package"),
+      makkahHotel: Yup.string().required(" Makkah hotel is required"),
+      madinahHotel: Yup.string().required(" Madinah hotel is required"),
+      price: Yup.number().required(" Madinah hotel is required"),
+    });
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      package: "",
+      makkahHotel: "",
+      madinahHotel: "",
+      price: "",
+    },
+    validationSchema: validatePackage(),
+
+    onSubmit: (values) => {
+      console.log(values);
+
+      // @ts-ignore
+      formik.handleReset();
+    },
+  });
+
+  // console.log(formik.values);
+
   const packageData = [
     {
       img: img1,
@@ -57,12 +90,11 @@ function Packages() {
         <div
           className="flex px-7 py-4 cursor-pointer rounded-md text-[#138951] text-base font-medium"
           style={{ border: "1px solid #DADADA" }}
-          
-          onClick={()=>setOpenModal(true)}
+          onClick={() => setIsOpen(true)}
         >
           <span className="mr-5">
             {" "}
-            <BsUpload size={20}/>
+            <BsUpload size={20} />
           </span>{" "}
           <span>Add Package</span>
         </div>
@@ -131,7 +163,7 @@ function Packages() {
                   Update
                 </button>
                 <button className="text-base text-white font-bold uppercase px-4 py-2 bg-red-600  rounded-full">
-                  Update
+                  Delete
                 </button>
               </div>
             </div>
@@ -149,13 +181,89 @@ function Packages() {
         ))}
       </div>
 
-      <button className='' onClick={() => setOpenModal(true)}>
-        Open Modal
-      </button>
-{openModal && < CustomModal header="Packages"  setIsOpen={setOpenModal}>
-  are u sure u wanna do this
-  </CustomModal>}
-      {/* < CustomModal/> */}
+      {isOpen && (
+        <CustomModal header="Add Package" setIsOpen={setIsOpen}>
+          <form action="" onSubmit={formik.handleSubmit}>
+            <div className="mb-3">
+              <Label> Package</Label>
+              <Select
+                id="cars"
+                name="package"
+                value={formik.values.package}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              >
+                <option value="" label="Slect a package" />
+                <option value="Umrah Package">Umrah Package</option>
+                <option value="Hajj Package">Hajj Package</option>
+                <option value="Ramadan Umrah">Ramadan Umrah</option>
+              </Select>
+
+              {formik.touched.package && formik.errors.package && (
+                <p className={"text-xs text-red-500"}>
+                  {formik.errors.package}
+                </p>
+              )}
+            </div>
+            <div className="mb-3">
+              <Label> Makkah Hotel</Label>
+              <Input
+                placeholder="Makkah hotel name"
+                type="text"
+                name="makkahHotel"
+                value={formik.values.makkahHotel}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+
+              {formik.touched.makkahHotel && formik.errors.makkahHotel && (
+                <p className={"text-xs text-red-500"}>
+                  {formik.errors.makkahHotel}
+                </p>
+              )}
+            </div>
+            <div className="mb-3">
+              <Label> Madinah Hotel</Label>
+              <Input
+                placeholder="Madinah hotel name"
+                type="text"
+                name="madinahHotel"
+                value={formik.values.madinahHotel}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.touched.madinahHotel && formik.errors.madinahHotel && (
+                <p className={"text-xs text-red-500"}>
+                  {formik.errors.madinahHotel}
+                </p>
+              )}
+            </div>
+            <div className="mb-3">
+              <Label> Price</Label>
+              <Input
+                placeholder="Price"
+                type="number"
+                name="price"
+                value={formik.values.price}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.touched.price && formik.errors.price && (
+                <p className={"text-xs text-red-500"}>{formik.errors.price}</p>
+              )}
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-[#1A8F4A] py-3 mt-2 shadow-lg rounded-sm text-[#FCFCFC]"
+            >
+              {" "}
+              submit{" "}
+            </button>
+          </form>
+        </CustomModal>
+      )}
+
+      {/* {modalType === "package" && <PackageModal isOpen={isOpen} />} */}
     </div>
   );
 }

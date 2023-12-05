@@ -17,7 +17,15 @@ export const Centered = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  min-width: 40%;
+
+  @media (max-width: 60px) {
+    width: 90%;
+  }
+  @media (max-width: 375px) {
+    width: 90%;
+  }
+
   /* padding: 10px; */
 `;
 
@@ -30,6 +38,16 @@ export const Modal = styled.div`
   border-radius: 16px;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
   padding: 20px !important;
+  
+  @media (max-width: 768px) {
+    /* width: 90%; */
+    padding: 10px !important;
+  }
+  @media (max-width: 375px) {
+    /* width: 90%; */
+    padding: 5px !important;
+  }
+
 `;
 
 
@@ -41,7 +59,7 @@ export const Header = styled.h5`
 
   text-align: center;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 25px;
 `;
 export const ModalContent = styled.p`
   padding: 10px;
