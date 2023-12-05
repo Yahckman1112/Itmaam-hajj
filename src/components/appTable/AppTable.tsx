@@ -4,6 +4,7 @@ interface TableProps {
   tableHeader: any[];
   showSerialNumber?: true;
   tableData?: any[];
+  
 }
 
 function AppTable({ tableHeader, showSerialNumber, tableData }: TableProps) {

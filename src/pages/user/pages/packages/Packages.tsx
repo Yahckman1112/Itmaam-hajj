@@ -36,9 +36,11 @@ function Packages() {
 
     onSubmit: (values) => {
       console.log(values);
+      setIsOpen(false)
 
       // @ts-ignore
       formik.handleReset();
+      
     },
   });
 
