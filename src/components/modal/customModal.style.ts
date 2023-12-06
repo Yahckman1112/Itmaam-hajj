@@ -3,12 +3,14 @@ import styled from "styled-components";
 export const DarkBg = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
   width: 100vw;
-  height: 100vh;
+  min-height: 140vh;
   z-index: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding: 5px;
   position: absolute;
+  
 
   
 `;
@@ -26,7 +28,6 @@ export const Centered = styled.div`
     width: 90%;
   }
 
-  /* padding: 10px; */
 `;
 
 export const Modal = styled.div`

@@ -5,10 +5,50 @@ import { CiLogout } from "react-icons/ci";
 import { Link, useLocation } from "react-router-dom";
 import { BsDot } from "react-icons/bs";
 import { AuthNav } from "../../../utils/mocks/mocks";
+import CustomModal from "../../../components/modal/CustomModal";
+import { useState } from "react";
+// import { Label } from "../../admin/admin.style";
+import { Input, Label } from "../pages/packages/package.styles";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 function SideNav() {
-  const location = useLocation()
-   
+  const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const validateAdmin = () => {
+    return Yup.object({
+      username: Yup.string().required("Choose a Package"),
+      fullname: Yup.string().required(" Makkah hotel is required"),
+      email: Yup.string().required(" Madinah hotel is required").email(),
+      role: Yup.string().required(" Madinah hotel is required"),
+      password: Yup.string().required(" Madinah hotel is required"),
+    });
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      fullname: "",
+      email: "",
+      role: "",
+      password: "",
+    },
+
+    validationSchema: validateAdmin(),
+
+    onSubmit: (values) => {
+      console.log(values);
+      setIsOpen(false)
+
+      // @ts-ignore
+      formik.handleReset();
+      
+    },
+  });
+
+  // console.log(formik.values);
+  
   return (
     <>
       <div className=" pt-12 px-9">
@@ -50,6 +90,7 @@ function SideNav() {
         <div
           className="py-2 px-2 flex m-auto text-white cursor-pointer bg-[#1A8F4A] w-fit"
           style={{ borderRadius: "100%" }}
+          onClick={() => setIsOpen(true)}
         >
           <FaPlus />
         </div>
@@ -57,7 +98,102 @@ function SideNav() {
         <div className="text-[#262627] font-[open-sans] text-base font-bold leading-8">
           Add new Admin
         </div>
-        <div> </div>
+
+        {isOpen && (
+          <CustomModal header="Admin" setIsOpen={setIsOpen}>
+            <form onSubmit={formik.handleSubmit}>
+              <div className=" text-left mb-5">
+                <Label> Username </Label>
+                <Input
+                  placeholder="Username"
+                  type="text"
+                  name="username"
+                  value={formik.values.username}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.username && formik.errors.username && (
+                  <p className={"text-xs text-red-500"}>
+                    {formik.errors.username}
+                  </p>
+                )}
+              </div>
+              <div className=" text-left mb-5">
+                <Label> Fullname </Label>
+                <Input
+                  placeholder="Fullname"
+                  name="fullname"
+                  type="text"
+
+                  value={formik.values.fullname}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.fullname && formik.errors.fullname && (
+                  <p className={"text-xs text-red-500"}>
+                    {formik.errors.fullname}
+                  </p>
+                )}
+              </div>
+
+              <div className=" text-left mb-5">
+                <Label> Email </Label>
+                <Input
+                  placeholder="Email"
+                  type="email"
+                  name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.email && formik.errors.email && (
+                  <p className={"text-xs text-red-500"}>
+                    {formik.errors.email}
+                  </p>
+                )}
+              </div>
+              <div className=" text-left mb-5">
+                <Label> Role </Label>
+                <Input
+                  placeholder="Role"
+                  name="role"
+
+                  type="text"
+                  value={formik.values.role}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.role && formik.errors.role && (
+                  <p className={"text-xs text-red-500"}>{formik.errors.role}</p>
+                )}
+              </div>
+              <div className=" text-left mb-5">
+                <Label> Password </Label>
+                <Input
+                  placeholder="**************************"
+                  type="password"
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.password && formik.errors.password && (
+                  <p className={"text-xs text-red-500"}>
+                    {formik.errors.password}
+                  </p>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-[#1A8F4A] py-3 mt-2 shadow-lg rounded-sm text-[#FCFCFC]"
+              >
+                Add Admin
+              </button>
+              
+            </form>
+          </CustomModal>
+        )}
       </div>
     </>
   );
