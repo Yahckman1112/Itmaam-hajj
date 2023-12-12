@@ -2,7 +2,7 @@ import { FaPlus } from "react-icons/fa";
 
 import { CiLogout } from "react-icons/ci";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsDot } from "react-icons/bs";
 import { AuthNav } from "../../../utils/mocks/mocks";
 import CustomModal from "../../../components/modal/CustomModal";
@@ -11,10 +11,16 @@ import { useState } from "react";
 import { Input, Label } from "../pages/packages/package.styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { BsSearch } from "react-icons/bs";
+import { FaAccessibleIcon } from "react-icons/fa";
+
+
+
 
 function SideNav() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
 
   const validateAdmin = () => {
     return Yup.object({
@@ -47,11 +53,27 @@ function SideNav() {
     },
   });
 
-  // console.log(formik.values);
+
+  const handleAddAdmin=()=>{
+    setIsOpen(true)
+    navigate('/user')
+  }
+
   
   return (
     <>
+
+
+      {/* <div className="block lg:hidden">
+          <FaAccessibleIcon size={30} />{" "}
+        </div> */}
+
+
       <div className=" pt-12 px-9">
+      <div className={`${'my-4 h-[3rem] bg-[#F5F5F5] rounded-md grid grid-cols-5 p-2  '} hideOnMobile`}>
+        <BsSearch size={18} className='mt-3' />
+        <input type="text" className={' outline-none col-span-4 bg-inherit '} placeholder="Search..." />
+      </div>
         {AuthNav.map((item: any, i: any) => (
           <Link key={i} to={item.path} className={` font-semibold  text-base `}>
             <div
@@ -90,7 +112,7 @@ function SideNav() {
         <div
           className="py-2 px-2 flex m-auto text-white cursor-pointer bg-[#1A8F4A] w-fit"
           style={{ borderRadius: "100%" }}
-          onClick={() => setIsOpen(true)}
+          onClick={handleAddAdmin}
         >
           <FaPlus />
         </div>

@@ -1,7 +1,6 @@
 import { FaHome, FaRegNewspaper, FaUsers  } from "react-icons/fa";
 import { LuPackagePlus } from "react-icons/lu";
-import { RiSettings2Line } from "react-icons/ri";
-
+import { IoMdNotificationsOutline } from "react-icons/io"
 
 export   const AuthNav = [
     {
@@ -29,9 +28,9 @@ export   const AuthNav = [
       location: ["/user/applicants"],
     },
     {
-      icon: <RiSettings2Line size={20} />,
-      name: "Settings",
-      path: "/user/settings",
-      location: ["/user/settings"],
+      icon: <IoMdNotificationsOutline size={20} />,
+      name: "Notifications",
+      path: "/user/notifications",
+      location: ["/user/notifications"],
     },
   ];
