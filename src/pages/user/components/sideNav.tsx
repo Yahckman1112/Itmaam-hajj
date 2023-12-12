@@ -12,7 +12,7 @@ import { Input, Label } from "../pages/packages/package.styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BsSearch } from "react-icons/bs";
-import { FaAccessibleIcon } from "react-icons/fa";
+
 
 
 
@@ -64,14 +64,12 @@ function SideNav() {
     <>
 
 
-      {/* <div className="block lg:hidden">
-          <FaAccessibleIcon size={30} />{" "}
-        </div> */}
+     
 
 
-      <div className=" pt-12 px-9">
-      <div className={`${'my-4 h-[3rem] bg-[#F5F5F5] rounded-md grid grid-cols-5 p-2  '} hideOnMobile`}>
-        <BsSearch size={18} className='mt-3' />
+      <div className=" px-9">
+      <div className={`${'my-6 mb-8 h-[3rem] bg-[#F5F5F5] rounded-md grid grid-cols-5 p-2  '} hideOnMobile`}>
+        <BsSearch size={18} className='mt-2' />
         <input type="text" className={' outline-none col-span-4 bg-inherit '} placeholder="Search..." />
       </div>
         {AuthNav.map((item: any, i: any) => (
