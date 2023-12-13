@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import banner from "../../assets/packagesBg.jpg";
 import AppHeader from "../appHeader/AppHeader";
-interface IPages{
-    pageName?:string;
-    bgImage?:any
+interface IPages {
+  pageName?: string;
+  bgImage?: any;
 }
 
-function CustomBanner({pageName, bgImage}:IPages) {
+function CustomBanner({ pageName, bgImage }: IPages) {
   const BannerDiv = styled.div`
     min-height: 75vh;
     max-width: 100%;
@@ -20,7 +20,9 @@ function CustomBanner({pageName, bgImage}:IPages) {
 
       <BannerDiv
         style={{
-          backgroundImage: ` linear-gradient(to bottom, #31124b39, #31124b65), url(${ bgImage || banner})`,
+          backgroundImage: ` linear-gradient(to bottom, #31124b39, #31124b65), url(${
+            bgImage || banner
+          })`,
         }}
       >
         <AppHeader />

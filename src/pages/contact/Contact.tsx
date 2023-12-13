@@ -2,9 +2,10 @@ import { GiSmartphone } from "react-icons/gi";
 import { FiMail, FiMap } from "react-icons/fi";
 import CustomBanner from "../../components/customBanner/CustomBanner";
 import banner from "../../assets/contsctBanner.jpg";
-import { Input } from "../register/register.style";
+// import { Input } from "../register/register.style";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { Input, TextArea } from "../user/pages/packages/package.styles";
 
 function Contact() {
   const location = [
@@ -75,7 +76,7 @@ function Contact() {
               Get In Touch
             </p>
           <form action="" onSubmit={formik.handleSubmit}>
-            <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
+            <div className=" mt-10">
               <Input
               
               placeholder="Your Full name" type="text" name="name"
@@ -89,7 +90,7 @@ function Contact() {
                 )}
 
                 
-            <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
+            <div className=" mt-10">
               <Input placeholder="Your Email" type="email" name="email" 
                  value={formik.values.email}
                  onChange={formik.handleChange}
@@ -100,7 +101,7 @@ function Contact() {
                   <p className='text-xs text-red-500'>{formik.errors.email}</p>
                 )}
 
-            <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
+            <div className=" mt-10">
               <Input placeholder="Subject" type="text" name="subject" 
                  value={formik.values.subject}
                  onChange={formik.handleChange}
@@ -111,15 +112,15 @@ function Contact() {
                   <p className='text-xs text-red-500'>{formik.errors.subject}</p>
                 )}
 
-            <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
-              <textarea
+            <div className=" mt-10">
+              <TextArea
                 className="w-full border-none outline-none "
                 placeholder="Your Message"
                 name="message"
                 value={formik.values.message}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-              ></textarea>
+              ></TextArea>
             </div>
             {formik.touched.message && formik.errors.message && (
                   <p className='text-xs text-red-500'>{formik.errors.message}</p>

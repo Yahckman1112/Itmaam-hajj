@@ -1,9 +1,10 @@
 import CustomBanner from "../../components/customBanner/CustomBanner";
 import banner from "../../assets/applyBanner.jpg";
 import formSide from "../../assets/3.jpg";
-import { Input } from "./register.style";
+// import { Input } from "./register.style";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Input } from "../user/pages/packages/package.styles";
 
 function Register() {
   const CusromerApply = () => {
@@ -51,9 +52,9 @@ function Register() {
             </p>
 
             <form  onSubmit={formik.handleSubmit}>
-              <div className=" grid-cols-2 gap-5">
+              <div className="grid lg:grid-cols-2 gap-5">
             
-                <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
+                <div className=" mt-10">
                   <Input
                     placeholder="First Name"
                     type="text"
@@ -66,7 +67,7 @@ function Register() {
                      {formik.touched.firstName && formik.errors.firstName && (
             <p className={'text-sm text-red-500'}>{formik.errors.firstName}</p>
           )}
-                <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
+                <div className=" mt-10">
                   <Input
                     placeholder="Last Name"
                     type="text"
@@ -80,7 +81,7 @@ function Register() {
             <p className={'text-sm text-red-500'}>{formik.errors.lastName}</p>
           )}
               </div>
-              <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
+              <div className=" mt-10">
                 <Input
                   placeholder="Email"
                   type="email"
@@ -93,7 +94,7 @@ function Register() {
                    {formik.touched.email && formik.errors.email && (
             <p className={'text-sm text-red-500'}>{formik.errors.email}</p>
           )}
-              <div className="border border-solid border-b-2 border-x-0 border-y-0 mt-10">
+              <div className=" mt-10">
                 <Input
                   placeholder={`Phone Number` }
                   type="number"

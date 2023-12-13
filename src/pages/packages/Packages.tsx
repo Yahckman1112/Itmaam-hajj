@@ -4,66 +4,31 @@ import img1 from "../../assets/3.jpg";
 import img2 from "../../assets/4.jpg";
 import MakkahHotel from "../../assets/hotel-1.png";
 import MadinahHotel from "../../assets/hotel.png";
+import config from "../../config.json";
+import http from "../../services/httpService";
 // @ts-ignore
 import ProgressBar from "react-progressbar";
+import { useEffect, useState } from "react";
+// import { number } from "yup";
 
 function Packages() {
-  const packageData = [
-    {
-      img: img1,
-      name: "Umrah Package",
-      time: 20,
-      currentPrice: 15000,
-      lastPrice: 18000,
-      registeredClient: 65,
-      totalSpace: 160,
-    },
-    {
-      img: img2,
-      name: "Hajj Package",
-      time: 20,
-      currentPrice: 15000,
-      lastPrice: 18000,
-      registeredClient: 76,
-      totalSpace: 160,
-    },
-    {
-      img: img1,
-      name: "Ramdan Umrah",
-      time: 20,
-      currentPrice: 15000,
-      lastPrice: 18000,
-      registeredClient: 55,
-      totalSpace: 160,
-    },
-    {
-      img: img2,
-      name: "Umrah and Turkey Tour",
-      time: 20,
-      currentPrice: 15000,
-      lastPrice: 18000,
-      registeredClient: 55,
-      totalSpace: 160,
-    },
-    {
-      img: img1,
-      name: "10 Days Umrah",
-      time: 20,
-      currentPrice: 15000,
-      lastPrice: 18000,
-      registeredClient: 55,
-      totalSpace: 160,
-    },
-    {
-      img: img2,
-      name: "7 days Umrah",
-      time: 20,
-      currentPrice: 15000,
-      lastPrice: 18000,
-      registeredClient: 55,
-      totalSpace: 160,
-    },
-  ];
+  const [packages, setPackages] = useState([]);
+  const imgs = [img1, img2];
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await http.get(`${config.apiUrl}/packages`);
+
+      console.log(data);
+      setPackages(data);
+    };
+    getData();
+  }, []);
+
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * imgs.length);
+    return imgs[randomIndex];
+  };
 
   return (
     <div>
@@ -73,13 +38,13 @@ function Packages() {
       <section className=" p-5 mg:p-10 lg:p-20 min-h-screen">
         <p className="text-center text-2xl font-semibold"> Our Packages</p>
         <div className="md:grid mt-7 md:grid-cols-1 lg:grid-cols-3 gap-7">
-          {packageData.map((item: any, i: any) => (
+          {packages.map((item: any, i: any) => (
             <div className="rounded-lg border border-solid my-7" key={i}>
               <div>
-                <img src={item.img} alt="" className="  object-cover" />
+                <img src={getRandomImage()} alt="" className="  object-cover" />
               </div>
               <div className="p-7">
-                <p className="text-2xl font-semibold">{item.name}</p>
+                <p className="text-2xl font-semibold">{item.packageName}</p>
                 <div
                   className="grid grid-cols-2 my-7 "
                   style={{ gridTemplateColumns: "20% 80%" }}
@@ -94,7 +59,7 @@ function Packages() {
                   </div>
                   <div>
                     <p className="text-[15px] font-semibold mb-1 ">
-                      MAKKAH : Hotel Name
+                      MAKKAH :{item.makkahHotelName}
                     </p>
                     <p className="text-[15px] font-bold text-[#007bff] ">
                       {item.time} MIN To Masjidil Haram
@@ -115,7 +80,7 @@ function Packages() {
                   </div>
                   <div>
                     <p className="text-[15px] font-semibold mb-1 ">
-                      MAKKAH : Hotel Name
+                      MAKKAH : {item.madinahHotelName}
                     </p>
                     <p className="text-[15px] font-bold text-[#007bff] ">
                       {item.time} MIN To Nabawi Mosque
@@ -126,9 +91,9 @@ function Packages() {
                 <p className="text-[#007bff] text-2xl font-semibold my-12 mb-7">
                   {" "}
                   <span className="text-[#929191] line-through text-lg font-normal">
-                    {item.lastPrice} USD/P
+                    {item.nullPrice} USD/P
                   </span>{" "}
-                  {item.currentPrice} USD/P{" "}
+                  {item.price} USD/P{" "}
                 </p>
 
                 <button className="text-base text-black font-bold uppercase px-12 py-3  bg-[#e5efffbc] hover:bg-[#ffc107] transition-transform duration-500 transform  rounded-full">
@@ -138,6 +103,7 @@ function Packages() {
               <div className="my-9 border border-solid border-t-1 border-b-0 border-r-0 border-l-0 pt-7 p-3">
                 <div className="w-full border border-solid rounded-lg">
                   <ProgressBar
+                    // completed={(item.registeredClient / item.totalSpace) * 100}
                     completed={(item.registeredClient / item.totalSpace) * 100}
                   />
                 </div>
