@@ -15,7 +15,7 @@ function AppTable({ tableHeader, showSerialNumber, tableData }: TableProps) {
       entries.push(element.key);
     });
   }
-  console.log(entries);
+  // console.log(entries);
 
   return (
     <div className=" max-w-[100%] overflow-x-scroll mb-14 ">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { GrUserAdmin } from "react-icons/gr";
 import { MdEventSeat } from "react-icons/md";
@@ -6,6 +6,8 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import NotificationCard from "../../../../components/notificationCard/NotificationCard";
 import AppTable from "./../../../../components/appTable/AppTable";
+import config from '../../../../config.json'
+import http from '../../../../services/httpService'
 
 type ValuePiece = Date | null;
 
@@ -13,6 +15,18 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 function Dashboard() {
   const [dateValue, setDateValue] = useState<Value>(new Date());
+  const [admin , setAdmin] = useState([])
+
+  useEffect(()=>{
+    const getData = async()=>{
+        const {data} = await http.get(`${config.apiUrl}/users`)
+        setAdmin(data);
+        
+    }
+    getData()
+  },[])
+  
+
   const tableData = [
     {
       fullname: "Adeniran Yaqub",
@@ -36,7 +50,8 @@ function Dashboard() {
     },
   ];
   const tableHeader = [
-    { label: "Fullname", key: "fullname" },
+    { label: "Fullname", key: "fullName" },
+    { label: "username", key: "userName" },
     { label: "Email", key: "email" },
     { label: "Role", key: "role" },
     ,
@@ -143,7 +158,7 @@ function Dashboard() {
         <p className="text-[#161E03] text-2xl font-bold  ">Admin List</p>
         <AppTable
           tableHeader={tableHeader}
-          tableData={tableData}
+          tableData={admin}
           showSerialNumber
         />
       </section>

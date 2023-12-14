@@ -8,7 +8,7 @@ interface NotificationProps {
   notification?: string;
   latest?: boolean;
   key:number
-  createdAt:Date | string
+  createdAt?:Date | string
   
 }
 
