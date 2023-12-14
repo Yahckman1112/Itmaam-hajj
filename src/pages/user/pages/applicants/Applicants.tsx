@@ -1,12 +1,27 @@
 
 import { FaSearch } from "react-icons/fa";
 import AppTable from "../../../../components/appTable/AppTable";
+import { useEffect, useState } from "react";
+import http from '../../../../services/httpService'
+import config from '../../../../config.json'
 
 function Applicants() {
+  const [applicants, setApplicants]= useState([])
+
+  useEffect(()=>{
+    const getData =async()=>{
+      const {data} = await http.get(`${config.apiUrl}/applicants`)
+
+      console.log(data);
+      setApplicants(data)
+      
+    } 
+    getData()
+  },[])
   const tableHeader = [
     { label: "Applicants ID", key: "applicantsId" },
-    { label: "Firstname", key: "firstname" },
-    { label: "Lastname", key: "lastname" },
+    { label: "Firstname", key: "firstName" },
+    { label: "Lastname", key: "lastName" },
     { label: "Gender", key: "gender" },
     { label: "Email", key: "email" },
     { label: "Package", key: "package" },
@@ -17,58 +32,58 @@ function Applicants() {
   const anyNumber =Math.floor( Math.random()*9999)
   console.log(anyNumber)
 
-  const tableData = [
-    {
-        applicantsId:`itmaam23/${anyNumber}`,
-        firstname:'Adewale',
-        lastname:'tobiloba',
-        email:'adex@gmail.com',
-        gender:'Male',
-        package:'Hajj',
-        phone:'09107812544'
+  // const tableData = [
+  //   {
+  //       applicantsId:`itmaam23/${anyNumber}`,
+  //       firstname:'Adewale',
+  //       lastname:'tobiloba',
+  //       email:'adex@gmail.com',
+  //       gender:'Male',
+  //       package:'Hajj',
+  //       phone:'09107812544'
 
-    },
-    {
-        applicantsId:`itmaam23/${anyNumber}`,
-        firstname:'Adewale',
-        lastname:'tobiloba',
-        email:'adex@gmail.com',
-        gender:'Male',
-        package:'Hajj',
-        phone:'09107812544'
+  //   },
+  //   {
+  //       applicantsId:`itmaam23/${anyNumber}`,
+  //       firstname:'Adewale',
+  //       lastname:'tobiloba',
+  //       email:'adex@gmail.com',
+  //       gender:'Male',
+  //       package:'Hajj',
+  //       phone:'09107812544'
 
-    },
-    {
-        applicantsId:`itmaam23/${anyNumber}`,
-        firstname:'Adewale',
-        lastname:'tobiloba',
-        email:'adex@gmail.com',
-        gender:'Male',
-        package:'Hajj',
-        phone:'09107812544'
+  //   },
+  //   {
+  //       applicantsId:`itmaam23/${anyNumber}`,
+  //       firstname:'Adewale',
+  //       lastname:'tobiloba',
+  //       email:'adex@gmail.com',
+  //       gender:'Male',
+  //       package:'Hajj',
+  //       phone:'09107812544'
 
-    },
-    {
-        applicantsId:`itmaam23/${anyNumber}`,
-        firstname:'Adewale',
-        lastname:'tobiloba',
-        email:'adex@gmail.com',
-        gender:'Male',
-        package:'Hajj',
-        phone:'09107812544'
+  //   },
+  //   {
+  //       applicantsId:`itmaam23/${anyNumber}`,
+  //       firstname:'Adewale',
+  //       lastname:'tobiloba',
+  //       email:'adex@gmail.com',
+  //       gender:'Male',
+  //       package:'Hajj',
+  //       phone:'09107812544'
 
-    },
-    {
-        applicantsId:`itmaam23/${anyNumber}`,
-        firstname:'Adewale',
-        lastname:'tobiloba',
-        email:'adex@gmail.com',
-        gender:'Male',
-        package:'Hajj',
-        phone:'09107812544'
+  //   },
+  //   {
+  //       applicantsId:`itmaam23/${anyNumber}`,
+  //       firstname:'Adewale',
+  //       lastname:'tobiloba',
+  //       email:'adex@gmail.com',
+  //       gender:'Male',
+  //       package:'Hajj',
+  //       phone:'09107812544'
 
-    },
-  ]
+  //   },
+  // ]
   return (
     <div>
       <p className="font-bold text-2xl text-[#1A8F4A] ">
@@ -95,7 +110,7 @@ function Applicants() {
       </div>
 
       <div className="py-9">
-        <AppTable tableData={tableData} tableHeader={tableHeader} showSerialNumber/>
+        <AppTable tableData={applicants} tableHeader={tableHeader} showSerialNumber/>
       </div>
     </div>
   );

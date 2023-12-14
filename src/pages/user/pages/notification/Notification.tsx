@@ -1,45 +1,39 @@
+import { useEffect, useState } from "react";
 import NotificationCard from "../../../../components/notificationCard/NotificationCard";
 import { Label, Input, TextArea } from "../packages/package.styles";
 import { BtnSubmit } from "./../packages/package.styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import config from "../../../../config.json";
+import http from "../../../../services/httpService";
+// import { Dayjs } from "dayjs";
+import { default as dayjs } from "dayjs";
+import Loader from "../../../../components/Loader/loader";
 
 function Notification() {
-  const notifications = [
-    {
-      title: " Registration for winter semeester starts",
-      body: `   Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde vel sint
-          aliquid dolorem in? Id, a. Aliquam, iure magni. Aliquam quasi nemo
-          consectetur laudantium, inventore iusto voluptatibus officia, vitae
-          voluptatum necessitatibus quo. Facere culpa alias vitae sint similique
-          hic ipsa?`,
-      latest: true,
-    },
-    {
-      title: " Registration for winter semeester starts",
-      body: `   Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde vel sint
-          aliquid dolorem in? Id, a. Aliquam, iure magni. Aliquam quasi nemo
-          consectetur laudantium, inventore iusto voluptatibus officia, vitae
-          voluptatum necessitatibus quo. Facere culpa alias vitae sint similique
-          hic ipsa?`,
-      latest: false,
-    },
-    {
-      title: " Registration for winter semeester starts",
-      body: `   Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde vel sint
-          aliquid dolorem in? Id, a. Aliquam, iure magni. Aliquam quasi nemo
-          consectetur laudantium, inventore iusto voluptatibus officia, vitae
-          voluptatum necessitatibus quo. Facere culpa alias vitae sint similique
-          hic ipsa?`,
-      latest: false,
-    },
-  ];
+  const [notify, setNotify] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      setIsFetching(true);
+      try {
+        const { data } = await http.get(`${config.apiUrl}/notifications`);
+        setNotify(data);
+        console.log(data);
+        setIsFetching(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getData();
+  }, []);
 
   const validateNotification = () => {
     return Yup.object({
       title: Yup.string().required(" title is required"),
       notification: Yup.string().required("  Notification is required"),
-
     });
   };
 
@@ -56,7 +50,7 @@ function Notification() {
       console.log(values);
 
       // @ts-ignore
-    //   formik.handleReset();
+      //   formik.handleReset();
     },
   });
 
@@ -95,15 +89,20 @@ function Notification() {
 
         <BtnSubmit type="submit">Add Notification</BtnSubmit>
       </form>
-
+      {isFetching && <Loader />}
       <div>
-        {notifications.map((item: any, i: number) => (
-          <NotificationCard
-            title={item.title}
-            notification={item.body}
-            latest={item.latest}
-            key={i}
-          />
+        {notify.map((item: any, i: number) => (
+          <>
+            <NotificationCard
+              title={item.title}
+              notification={item.body}
+              latest={i === 0}
+              key={i}
+              createdAt={dayjs(item.createdAt).format("DD.MM.YYYY; HH:MM")}
+            />
+
+            {console.log(item.createdAt)}
+          </>
         ))}
       </div>
     </div>

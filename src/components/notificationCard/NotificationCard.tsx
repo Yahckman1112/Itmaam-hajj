@@ -1,15 +1,25 @@
 import { useState } from "react";
 
+
+
+
 interface NotificationProps {
   title?: string;
   notification?: string;
   latest?: boolean;
   key:number
+  createdAt:Date | string
   
 }
 
-function NotificationCard({ title, notification, latest,key }: NotificationProps) {
+
+
+function NotificationCard({ title, notification, latest,key, createdAt }: NotificationProps) {
   const [readMore, setReadMore] = useState(true);
+  // console.log(createdAt);
+  // console.log(dayjs(createdAt).format('DD.MM.YYYY; HH:MM'));
+  
+  
 
   return (
     <div
@@ -24,6 +34,8 @@ function NotificationCard({ title, notification, latest,key }: NotificationProps
         {latest && (
           <p className="text-[#FCC43E] tet-sm font-normal "> Latest</p>
         )}
+
+        <p className="text-[#000] text-sm">{createdAt}</p>
       </div>
 
       <div className="flex justify-between">
