@@ -23,6 +23,7 @@ function Applicants() {
     return data.filter((item: any) =>
       searchKeys.some((key) => {
         const value = item[key];
+        // @ts-ignore
         return typeof value === "string" && value.toLowerCase().includes(query);
       })
     );

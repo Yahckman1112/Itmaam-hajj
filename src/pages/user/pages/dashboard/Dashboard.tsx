@@ -27,28 +27,28 @@ function Dashboard() {
   },[])
   
 
-  const tableData = [
-    {
-      fullname: "Adeniran Yaqub",
-      email: "adeniranajibade1212@gmail.com",
-      role: "Treaseurer",
-    },
-    {
-      fullname: "Adeniran Yaqub",
-      email: "adeniranajibade1212@gmail.com",
-      role: "Treaseurer",
-    },
-    {
-      fullname: "Adeniran Yaqub",
-      email: "adeniranajibade1212@gmail.com",
-      role: "Treaseurer",
-    },
-    {
-      fullname: "Adeniran Yaqub",
-      email: "adeniranajibade1212@gmail.com",
-      role: "Treaseurer",
-    },
-  ];
+  // const tableData = [
+  //   {
+  //     fullname: "Adeniran Yaqub",
+  //     email: "adeniranajibade1212@gmail.com",
+  //     role: "Treaseurer",
+  //   },
+  //   {
+  //     fullname: "Adeniran Yaqub",
+  //     email: "adeniranajibade1212@gmail.com",
+  //     role: "Treaseurer",
+  //   },
+  //   {
+  //     fullname: "Adeniran Yaqub",
+  //     email: "adeniranajibade1212@gmail.com",
+  //     role: "Treaseurer",
+  //   },
+  //   {
+  //     fullname: "Adeniran Yaqub",
+  //     email: "adeniranajibade1212@gmail.com",
+  //     role: "Treaseurer",
+  //   },
+  // ];
   const tableHeader = [
     { label: "Fullname", key: "fullName" },
     { label: "username", key: "userName" },
