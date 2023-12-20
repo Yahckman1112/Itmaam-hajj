@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { Input, Select } from "../user/pages/packages/package.styles";
 import config from "../../config.json";
 import http from "../../services/httpService";
+import Swal from "sweetalert2";
 
 function Register() {
   const CusromerApply = () => {
@@ -38,8 +39,27 @@ function Register() {
       try {
         
         await http.post(`${config.apiUrl}/applicants`,values);
-      } catch (error) {
-        console.log(error);
+      
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: 'Application submitted successdully',
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+        formik.handleReset()
+      } catch (error:any) {
+        console.log(error?.response.data);
+        console.log(error.response);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response?.data || "Something Failed",
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+        
+
         
       }
 

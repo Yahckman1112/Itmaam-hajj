@@ -27,7 +27,10 @@ function Applicants() {
         return typeof value === "string" && value.toLowerCase().includes(query);
       })
     );
+
   };
+
+  
 
   useEffect(() => {
     const getData = async () => {
