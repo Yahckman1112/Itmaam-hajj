@@ -53,7 +53,9 @@ function Packages() {
     },
     validationSchema: validatePackage(),
 
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
+      // await http.post(`${config.apiUrl}/packages`,values);
+
       console.log(values);
       setIsOpen(false)
 
