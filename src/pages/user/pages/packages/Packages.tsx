@@ -6,15 +6,34 @@ import MakkahHotel from "./../../../../assets/hotel-1.png";
 import MadinahHotel from "./../../../../assets/hotel.png";
 import { BsUpload } from "react-icons/bs";
 import CustomModal from "../../../../components/modal/CustomModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input, Label, Select } from "./package.styles";
-
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import http from '../../../../services/httpService'
+import config from '../../../../config.json'
+
 
 function Packages() {
-  // const [openModal, setOpenModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [packages, setPackages] = useState([]);
+  const imgs = [img1, img2];
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await http.get(`${config.apiUrl}/packages`);
+
+      console.log(data);
+      setPackages(data);
+    };
+    getData();
+  }, []);
+
+  const getRandomImage = ()=>{
+    const randomIndex = Math.floor(Math.random()*imgs.length)
+    return imgs[randomIndex]
+  }
+
 
   const validatePackage = () => {
     return Yup.object({
@@ -46,44 +65,7 @@ function Packages() {
 
   // console.log(formik.values);
 
-  const packageData = [
-    {
-      img: img1,
-      name: "Umrah Package",
-      time: 20,
-      currentPrice: 15000,
-      lastPrice: 18000,
-      registeredClient: 65,
-      totalSpace: 160,
-    },
-    {
-      img: img2,
-      name: "Hajj Package",
-      time: 20,
-      currentPrice: 15000,
-      lastPrice: 18000,
-      registeredClient: 76,
-      totalSpace: 160,
-    },
-    {
-      img: img1,
-      name: "Ramdan Umrah",
-      time: 20,
-      currentPrice: 15000,
-      lastPrice: 18000,
-      registeredClient: 55,
-      totalSpace: 160,
-    },
-    {
-      img: img2,
-      name: "Umrah and Turkey Tour",
-      time: 20,
-      currentPrice: 15000,
-      lastPrice: 18000,
-      registeredClient: 55,
-      totalSpace: 160,
-    },
-  ];
+
   return (
     <div className="w-[100%]">
       <div className="flex justify-between">
@@ -103,10 +85,10 @@ function Packages() {
       </div>
 
       <div className="md:grid mt-7 md:grid-cols-1 lg:grid-cols-3 gap-7">
-        {packageData.map((item: any, i: any) => (
+        {packages.map((item: any, i: any) => (
           <div className="rounded-lg border border-solid my-7" key={i}>
             <div>
-              <img src={item.img} alt="" className="  object-cover" />
+              <img src={getRandomImage()} alt="" className="  object-cover" />
             </div>
             <div className="p-7">
               <p className="text-2xl font-semibold">{item.name}</p>
@@ -124,7 +106,7 @@ function Packages() {
                 </div>
                 <div>
                   <p className="text-[15px] font-semibold mb-1 ">
-                    MAKKAH : Hotel Name
+                    MAKKAH : {item.makkahHotemName}
                   </p>
                   <p className="text-[15px] font-bold text-[#007bff] ">
                     {item.time} MIN To Masjidil Haram
@@ -145,7 +127,7 @@ function Packages() {
                 </div>
                 <div>
                   <p className="text-[15px] font-semibold mb-1 ">
-                    MAKKAH : Hotel Name
+                    MAKKAH : {item.madinahHotemName}
                   </p>
                   <p className="text-[15px] font-bold text-[#007bff] ">
                     {item.time} MIN To Nabawi Mosque
@@ -156,9 +138,9 @@ function Packages() {
               <p className="text-[#007bff] text-2xl font-semibold my-12 mb-7">
                 {" "}
                 <span className="text-[#929191] line-through text-lg font-normal">
-                  {item.lastPrice} USD/P
+                  {item.nullPrice} USD/P
                 </span>{" "}
-                {item.currentPrice} USD/P{" "}
+                {item.price} USD/P{" "}
               </p>
               <div className="flex justify-between">
                 <button className="text-base text-white font-bold uppercase px-4 py-2  bg-[#155fd6bc]  rounded-full">

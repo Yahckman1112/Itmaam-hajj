@@ -47,7 +47,8 @@ function Register() {
           showCancelButton: true,
           showConfirmButton: false,
         });
-        formik.handleReset()
+        formik.handleReset(values)
+        
       } catch (error:any) {
         console.log(error?.response.data);
         console.log(error.response);

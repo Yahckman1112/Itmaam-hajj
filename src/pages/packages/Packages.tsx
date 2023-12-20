@@ -100,7 +100,7 @@ function Packages() {
 
 
                 <button className="text-base text-black font-bold uppercase px-12 py-3  bg-[#e5efffbc] hover:bg-[#ffc107] transition-transform duration-500 transform  rounded-full">
-                  Apply Now
+                 Read More
                 </button>
               </div>
               <div className="my-9 border border-solid border-t-1 border-b-0 border-r-0 border-l-0 pt-7 p-3">
