@@ -8,7 +8,7 @@ interface NotificationProps {
   notification?: string;
   latest?: boolean;
   key:number
-  createdAt?:Date | string
+  createdAt?:  string | undefined
   
 }
 
@@ -34,7 +34,6 @@ function NotificationCard({ title, notification, latest,key, createdAt }: Notifi
         {latest && (
           <p className="text-[#FCC43E] tet-sm font-normal "> Latest</p>
         )}
-
         <p className="text-[#000] text-sm">{createdAt}</p>
       </div>
 
