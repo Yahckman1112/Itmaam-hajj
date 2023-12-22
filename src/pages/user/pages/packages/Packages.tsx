@@ -10,16 +10,16 @@ import { useEffect, useState } from "react";
 import { Input, Label, Select } from "./package.styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import http from '../../../../services/httpService'
-import config from '../../../../config.json'
+import http from "../../../../services/httpService";
+import config from "../../../../config.json";
 import Swal from "sweetalert2";
-
+import { useParams } from "react-router-dom";
 
 function Packages() {
   const [isOpen, setIsOpen] = useState(false);
   const [packages, setPackages] = useState([]);
   const imgs = [img1, img2];
-
+  const { id } = useParams();
   useEffect(() => {
     const getData = async () => {
       const { data } = await http.get(`${config.apiUrl}/packages`);
@@ -30,11 +30,10 @@ function Packages() {
     getData();
   }, []);
 
-  const getRandomImage = ()=>{
-    const randomIndex = Math.floor(Math.random()*imgs.length)
-    return imgs[randomIndex]
-  }
-
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * imgs.length);
+    return imgs[randomIndex];
+  };
 
   const validatePackage = () => {
     return Yup.object({
@@ -45,35 +44,33 @@ function Packages() {
     });
   };
 
-
   const formik = useFormik({
     initialValues: {
       packageName: "",
       makkahHotelName: "",
       madinahHotelName: "",
       price: "",
-      time:20,
-      totalSpace:150,
-      overview:"comming soon"
+      time: 20,
+      totalSpace: 150,
+      overview: "comming soon",
     },
     validationSchema: validatePackage(),
 
     onSubmit: async (values) => {
-      
-      console.log('sdfghjkl;',values);
-   
+      console.log("sdfghjkl;", values);
+
       try {
-        await http.post(`${config.apiUrl}/packages`, values)
-    
+        await http.post(`${config.apiUrl}/packages`, values);
+
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: 'Application submitted successdully',
+          text: "Application submitted successdully",
           showCancelButton: true,
           showConfirmButton: false,
         });
-        setIsOpen(false)
-      } catch (error:any) {
+        setIsOpen(false);
+      } catch (error: any) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -82,20 +79,41 @@ function Packages() {
           showConfirmButton: false,
         });
       }
-      
     },
   });
 
-const handleDelete = (id:any)=>{
-  console.log('delete btn clicked');
   
-}
 
+  const handleDelete = async (id: any) => {
+    console.log("delete btn clicked", id);
+
+    try {
+      await http.delete(`${config.apiUrl}/packages/${id}`);
+      const updatedPackages = packages.filter((item:any) => item.id !== id);
+      setPackages(updatedPackages);
+
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Package Deleted",
+        showCancelButton: true,
+        showConfirmButton: false,
+      });
+    } catch (error: any) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops....",
+        text: error.response?.data || "Failed to delete package",
+      });
+    }
+  };
 
   return (
     <div className="w-[100%]">
       <div className="flex justify-between">
-        <p className="md:text-3xl text-2xl font-bold text-[#1A8F4A]">Resources</p>
+        <p className="md:text-3xl text-2xl font-bold text-[#1A8F4A]">
+          Resources
+        </p>
 
         <div
           className="flex px-3 md:px-7 py-2 md:py-4 cursor-pointer rounded-md text-[#138951] text-base font-medium"
@@ -173,8 +191,11 @@ const handleDelete = (id:any)=>{
                   Update
                 </button>
                 <button
-                onClick={()=>{handleDelete(item.id)}}
-                className="text-base text-white font-bold uppercase px-4 py-2 bg-red-600  rounded-full">
+                  onClick={() => {
+                    handleDelete(item._id);
+                  }}
+                  className="text-base text-white font-bold uppercase px-4 py-2 bg-red-600  rounded-full"
+                >
                   Delete
                 </button>
               </div>
@@ -228,11 +249,12 @@ const handleDelete = (id:any)=>{
                 onBlur={formik.handleBlur}
               />
 
-              {formik.touched.makkahHotelName && formik.errors.makkahHotelName && (
-                <p className={"text-xs text-red-500"}>
-                  {formik.errors.makkahHotelName}
-                </p>
-              )}
+              {formik.touched.makkahHotelName &&
+                formik.errors.makkahHotelName && (
+                  <p className={"text-xs text-red-500"}>
+                    {formik.errors.makkahHotelName}
+                  </p>
+                )}
             </div>
             <div className="mb-3">
               <Label> Madinah Hotel</Label>
@@ -244,11 +266,12 @@ const handleDelete = (id:any)=>{
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.madinahHotelName && formik.errors.madinahHotelName && (
-                <p className={"text-xs text-red-500"}>
-                  {formik.errors.madinahHotelName}
-                </p>
-              )}
+              {formik.touched.madinahHotelName &&
+                formik.errors.madinahHotelName && (
+                  <p className={"text-xs text-red-500"}>
+                    {formik.errors.madinahHotelName}
+                  </p>
+                )}
             </div>
             <div className="mb-3">
               <Label> Price</Label>
