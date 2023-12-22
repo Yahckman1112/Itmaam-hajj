@@ -15,81 +15,31 @@ import config from "../../../../config.json";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 
+interface SelectedPackageValue {
+  packageName: any;
+  makkahHotelName: any;
+  madinahHotelName: any;
+  price: any;
+  time: any;
+  totalSpace: any;
+  overview: any;
+  _id: any;
+}
+
 function Packages() {
   const [isOpen, setIsOpen] = useState(false);
   const [packages, setPackages] = useState([]);
+  const [selectedPackage, setSelectedPackage] =
+    useState<SelectedPackageValue | null>(null);
   const imgs = [img1, img2];
-  const { id } = useParams();
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await http.get(`${config.apiUrl}/packages`);
-
-      console.log(data);
-      setPackages(data);
-    };
-    getData();
-  }, []);
-
-  const getRandomImage = () => {
-    const randomIndex = Math.floor(Math.random() * imgs.length);
-    return imgs[randomIndex];
-  };
-
-  const validatePackage = () => {
-    return Yup.object({
-      packageName: Yup.string().required("Choose a Package"),
-      makkahHotelName: Yup.string().required(" Makkah hotel is required"),
-      madinahHotelName: Yup.string().required(" Madinah hotel is required"),
-      price: Yup.number().required(" Madinah hotel is required"),
-    });
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      packageName: "",
-      makkahHotelName: "",
-      madinahHotelName: "",
-      price: "",
-      time: 20,
-      totalSpace: 150,
-      overview: "comming soon",
-    },
-    validationSchema: validatePackage(),
-
-    onSubmit: async (values) => {
-      console.log("sdfghjkl;", values);
-
-      try {
-        await http.post(`${config.apiUrl}/packages`, values);
-
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Application submitted successdully",
-          showCancelButton: true,
-          showConfirmButton: false,
-        });
-        setIsOpen(false);
-      } catch (error: any) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: error.response?.data || "Something Failed",
-          showCancelButton: true,
-          showConfirmButton: false,
-        });
-      }
-    },
-  });
-
-  
+  // const { id } = useParams();
 
   const handleDelete = async (id: any) => {
     console.log("delete btn clicked", id);
 
     try {
       await http.delete(`${config.apiUrl}/packages/${id}`);
-      const updatedPackages = packages.filter((item:any) => item.id !== id);
+      const updatedPackages = packages.filter((item: any) => item.id !== id);
       setPackages(updatedPackages);
 
       Swal.fire({
@@ -107,6 +57,93 @@ function Packages() {
       });
     }
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await http.get(`${config.apiUrl}/packages`);
+
+      console.log(data);
+      setPackages(data);
+    };
+    getData();
+  }, []);
+
+  const handleUpdate = (id: any) => {
+    console.log("update btn clicked", id);
+
+    const selected: any = packages.find((item: any) => item._id === id);
+    console.log(selected);
+
+    setSelectedPackage(selected);
+    setIsOpen(true);
+  };
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * imgs.length);
+    return imgs[randomIndex];
+  };
+
+  const validatePackage = () => {
+    return Yup.object({
+      packageName: Yup.string().required("Choose a Package"),
+      makkahHotelName: Yup.string().required(" Makkah hotel is required"),
+      madinahHotelName: Yup.string().required(" Madinah hotel is required"),
+      price: Yup.number().required(" Madinah hotel is required"),
+    });
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      packageName: selectedPackage?.packageName || "",
+      makkahHotelName: selectedPackage?.makkahHotelName || "",
+      madinahHotelName: selectedPackage?.madinahHotelName || "",
+      price: selectedPackage?.price || "",
+      time: 20,
+      totalSpace: 150,
+      overview: "comming soon",
+    },
+    validationSchema: validatePackage(),
+
+    onSubmit: async (values) => {
+      console.log("sdfghjkl;", values);
+
+      try {
+        if (selectedPackage) {
+          await http.put(`${config.apiUrl}/packages/${selectedPackage._id}`, {
+            packageName: values.packageName,
+            makkahHotelName: values.makkahHotelName,
+            madinahHotelName: values.madinahHotelName,
+
+            totalSpace: 110,
+            price: values.price,
+
+            time: 20,
+            overview: "updated overview",
+          });
+        } else {
+          await http.post(`${config.apiUrl}/packages`, values);
+        }
+
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: selectedPackage
+            ? "Package Updated Successfully"
+            : "Application submitted successdully",
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+        setIsOpen(false);
+      } catch (error: any) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response?.data || "Something Failed",
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+      }
+    },
+  });
 
   return (
     <div className="w-[100%]">
@@ -135,7 +172,7 @@ function Packages() {
               <img src={getRandomImage()} alt="" className="  object-cover" />
             </div>
             <div className="p-7">
-              <p className="text-2xl font-semibold">{item.name}</p>
+              <p className="text-2xl font-semibold">{item.packageName}</p>
               <div
                 className="grid grid-cols-2 my-7 "
                 style={{ gridTemplateColumns: "20% 80%" }}
@@ -187,7 +224,10 @@ function Packages() {
                 {item.price} USD/P{" "}
               </p>
               <div className="flex justify-between">
-                <button className="text-base text-white font-bold uppercase px-4 py-2  bg-[#155fd6bc]  rounded-full">
+                <button
+                  onClick={() => handleUpdate(item._id)}
+                  className="text-base text-white font-bold uppercase px-4 py-2  bg-[#155fd6bc]  rounded-full"
+                >
                   Update
                 </button>
                 <button
@@ -222,7 +262,9 @@ function Packages() {
               <Select
                 id="cars"
                 name="packageName"
-                value={formik.values.packageName}
+                value={
+                  selectedPackage?.packageName || formik.values.packageName
+                }
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               >
@@ -234,6 +276,8 @@ function Packages() {
 
               {formik.touched.packageName && formik.errors.packageName && (
                 <p className={"text-xs text-red-500"}>
+                  {/* @ts-ignore */}
+
                   {formik.errors.packageName}
                 </p>
               )}
@@ -252,6 +296,8 @@ function Packages() {
               {formik.touched.makkahHotelName &&
                 formik.errors.makkahHotelName && (
                   <p className={"text-xs text-red-500"}>
+                    {/* @ts-ignore */}
+
                     {formik.errors.makkahHotelName}
                   </p>
                 )}
@@ -269,6 +315,8 @@ function Packages() {
               {formik.touched.madinahHotelName &&
                 formik.errors.madinahHotelName && (
                   <p className={"text-xs text-red-500"}>
+                    {/* @ts-ignore */}
+
                     {formik.errors.madinahHotelName}
                   </p>
                 )}
@@ -284,15 +332,17 @@ function Packages() {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.price && formik.errors.price && (
-                <p className={"text-xs text-red-500"}>{formik.errors.price}</p>
+                <p className={"text-xs text-red-500"}>
+                  {/* @ts-ignore */}
+                  {formik.errors.price}
+                </p>
               )}
             </div>
             <button
               type="submit"
               className="w-full bg-[#1A8F4A] py-3 mt-2 shadow-lg rounded-sm text-[#FCFCFC]"
             >
-              {" "}
-              submit{" "}
+              {selectedPackage ? "Update" : "Save"}
             </button>
           </form>
         </CustomModal>
