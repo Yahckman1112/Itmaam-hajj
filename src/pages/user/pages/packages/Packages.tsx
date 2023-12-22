@@ -13,7 +13,6 @@ import * as Yup from "yup";
 import http from "../../../../services/httpService";
 import config from "../../../../config.json";
 import Swal from "sweetalert2";
-import { useParams } from "react-router-dom";
 
 interface SelectedPackageValue {
   packageName: any;
