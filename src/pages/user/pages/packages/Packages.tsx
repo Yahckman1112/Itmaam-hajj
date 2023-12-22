@@ -36,18 +36,33 @@ function Packages() {
   const handleDelete = async (id: any) => {
     console.log("delete btn clicked", id);
 
-    try {
-      await http.delete(`${config.apiUrl}/packages/${id}`);
-      const updatedPackages = packages.filter((item: any) => item.id !== id);
-      setPackages(updatedPackages);
+    
+ 
 
-      Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: "Package Deleted",
+    try {
+      const confirmed =await  Swal.fire({
+        icon:"question",
+        text:"Are You sure You want to delete",
         showCancelButton: true,
-        showConfirmButton: false,
-      });
+        showConfirmButton: true,
+      })
+     
+      if(confirmed.isConfirmed){
+        await http.delete(`${config.apiUrl}/packages/${id}`);
+        const updatedPackages = packages.filter((item: any) => item.id !== id);
+        setPackages(updatedPackages);
+  
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Package Deleted",
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+
+      }
+
+
     } catch (error: any) {
       Swal.fire({
         icon: "error",
@@ -56,6 +71,7 @@ function Packages() {
       });
     }
   };
+
 
   useEffect(() => {
     const getData = async () => {
