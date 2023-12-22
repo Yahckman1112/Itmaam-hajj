@@ -12,6 +12,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import http from '../../../../services/httpService'
 import config from '../../../../config.json'
+import Swal from "sweetalert2";
 
 
 function Packages() {
@@ -37,35 +38,58 @@ function Packages() {
 
   const validatePackage = () => {
     return Yup.object({
-      package: Yup.string().required("Choose a Package"),
-      makkahHotel: Yup.string().required(" Makkah hotel is required"),
-      madinahHotel: Yup.string().required(" Madinah hotel is required"),
+      packageName: Yup.string().required("Choose a Package"),
+      makkahHotelName: Yup.string().required(" Makkah hotel is required"),
+      madinahHotelName: Yup.string().required(" Madinah hotel is required"),
       price: Yup.number().required(" Madinah hotel is required"),
     });
   };
 
+
   const formik = useFormik({
     initialValues: {
-      package: "",
-      makkahHotel: "",
-      madinahHotel: "",
+      packageName: "",
+      makkahHotelName: "",
+      madinahHotelName: "",
       price: "",
+      time:20,
+      totalSpace:150,
+      overview:"comming soon"
     },
     validationSchema: validatePackage(),
 
     onSubmit: async (values) => {
-      // await http.post(`${config.apiUrl}/packages`,values);
-
-      console.log(values);
-      setIsOpen(false)
-
-      // @ts-ignore
-      formik.handleReset();
+      
+      console.log('sdfghjkl;',values);
+   
+      try {
+        await http.post(`${config.apiUrl}/packages`, values)
+    
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: 'Application submitted successdully',
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+        setIsOpen(false)
+      } catch (error:any) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response?.data || "Something Failed",
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+      }
       
     },
   });
 
-  // console.log(formik.values);
+const handleDelete = (id:any)=>{
+  console.log('delete btn clicked');
+  
+}
 
 
   return (
@@ -148,7 +172,9 @@ function Packages() {
                 <button className="text-base text-white font-bold uppercase px-4 py-2  bg-[#155fd6bc]  rounded-full">
                   Update
                 </button>
-                <button className="text-base text-white font-bold uppercase px-4 py-2 bg-red-600  rounded-full">
+                <button
+                onClick={()=>{handleDelete(item.id)}}
+                className="text-base text-white font-bold uppercase px-4 py-2 bg-red-600  rounded-full">
                   Delete
                 </button>
               </div>
@@ -174,8 +200,8 @@ function Packages() {
               <Label> Package</Label>
               <Select
                 id="cars"
-                name="package"
-                value={formik.values.package}
+                name="packageName"
+                value={formik.values.packageName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               >
@@ -185,9 +211,9 @@ function Packages() {
                 <option value="Ramadan Umrah">Ramadan Umrah</option>
               </Select>
 
-              {formik.touched.package && formik.errors.package && (
+              {formik.touched.packageName && formik.errors.packageName && (
                 <p className={"text-xs text-red-500"}>
-                  {formik.errors.package}
+                  {formik.errors.packageName}
                 </p>
               )}
             </div>
@@ -196,15 +222,15 @@ function Packages() {
               <Input
                 placeholder="Makkah hotel name"
                 type="text"
-                name="makkahHotel"
-                value={formik.values.makkahHotel}
+                name="makkahHotelName"
+                value={formik.values.makkahHotelName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
 
-              {formik.touched.makkahHotel && formik.errors.makkahHotel && (
+              {formik.touched.makkahHotelName && formik.errors.makkahHotelName && (
                 <p className={"text-xs text-red-500"}>
-                  {formik.errors.makkahHotel}
+                  {formik.errors.makkahHotelName}
                 </p>
               )}
             </div>
@@ -213,14 +239,14 @@ function Packages() {
               <Input
                 placeholder="Madinah hotel name"
                 type="text"
-                name="madinahHotel"
-                value={formik.values.madinahHotel}
+                name="madinahHotelName"
+                value={formik.values.madinahHotelName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.madinahHotel && formik.errors.madinahHotel && (
+              {formik.touched.madinahHotelName && formik.errors.madinahHotelName && (
                 <p className={"text-xs text-red-500"}>
-                  {formik.errors.madinahHotel}
+                  {formik.errors.madinahHotelName}
                 </p>
               )}
             </div>

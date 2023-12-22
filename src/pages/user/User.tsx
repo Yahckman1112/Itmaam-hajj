@@ -22,6 +22,7 @@ function User() {
         <div className="max-h-screen overflow-y-scroll flex-1 p-6 bg-[#FCFFF5]">
           <Routes>
             <Route path="/packages" element={<Packages />} />
+            <Route path="/packages/:id" element={<Packages />} />
             <Route path="/applicants" element={<Applicants />} />
             <Route path="/notifications" element={< Notification />} />
             <Route path="/" element={<Dashboard />} />
