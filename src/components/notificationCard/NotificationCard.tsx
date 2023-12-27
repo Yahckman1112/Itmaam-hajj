@@ -9,6 +9,7 @@ interface NotificationProps {
   key: number;
   createdAt?: string | undefined;
   onClick?: () => void;
+  showDeleteBtn?:boolean
 }
 
 function NotificationCard({
@@ -18,6 +19,7 @@ function NotificationCard({
   key,
   createdAt,
   onClick,
+  showDeleteBtn
 }: NotificationProps) {
   const [readMore, setReadMore] = useState(true);
 
@@ -26,10 +28,12 @@ function NotificationCard({
       key={key}
       className="w-full mb-6 bg-[#F2FFF7] cursor-pointer min-h-[88px] rounded-lg p-3 border border-solid border-l-4 border-y-0 border-x-0 border-[#1A8F4A]"
     >
+{showDeleteBtn && 
       <div className="flex justify-end" onClick={onClick}>
         <FaRegTrashCan className="cursor-pointer -mt-5 mb-5 " />
       </div>
 
+}
       <div
         onClick={() => {
           setReadMore(!readMore);

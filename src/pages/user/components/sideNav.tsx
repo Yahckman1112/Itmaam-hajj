@@ -12,20 +12,19 @@ import { Input, Label } from "../pages/packages/package.styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BsSearch } from "react-icons/bs";
-
-
-
-
+import http from "../../../services/httpService";
+import config from "../../../config.json";
+import Swal from "sweetalert2";
 
 function SideNav() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const validateAdmin = () => {
     return Yup.object({
-      username: Yup.string().required("Choose a Package"),
-      fullname: Yup.string().required(" Makkah hotel is required"),
+      userName: Yup.string().required("Choose a Package"),
+      fullName: Yup.string().required(" Makkah hotel is required"),
       email: Yup.string().required(" Madinah hotel is required").email(),
       role: Yup.string().required(" Madinah hotel is required"),
       password: Yup.string().required(" Madinah hotel is required"),
@@ -34,8 +33,8 @@ function SideNav() {
 
   const formik = useFormik({
     initialValues: {
-      username: "",
-      fullname: "",
+      userName: "",
+      fullName: "",
       email: "",
       role: "",
       password: "",
@@ -43,35 +42,50 @@ function SideNav() {
 
     validationSchema: validateAdmin(),
 
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
-      setIsOpen(false)
-
-      // @ts-ignore
-      formik.handleReset();
       
+      try {
+        await http.post(`${config.apiUrl}/users`, values);
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: 'Admin added successfully',
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+          setIsOpen(false);
+      } catch (error:any) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response?.data || "Something Failed",
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+        
+      }
     },
   });
 
+  const handleAddAdmin = () => {
+    setIsOpen(true);
+    navigate("/user");
+  };
 
-  const handleAddAdmin=()=>{
-    setIsOpen(true)
-    navigate('/user')
-  }
-
-  
   return (
     <>
-
-
-     
-
-
       <div className=" px-9">
-      <div className={`${'my-6 mb-8 h-[3rem] bg-[#F5F5F5] rounded-md grid grid-cols-5 p-2  '} hideOnMobile`}>
-        <BsSearch size={18} className='mt-2' />
-        <input type="text" className={' outline-none col-span-4 bg-inherit '} placeholder="Search..." />
-      </div>
+        <div
+          className={`${"my-6 mb-8 h-[3rem] bg-[#F5F5F5] rounded-md grid grid-cols-5 p-2  "} hideOnMobile`}
+        >
+          <BsSearch size={18} className="mt-2" />
+          <input
+            type="text"
+            className={" outline-none col-span-4 bg-inherit "}
+            placeholder="Search..."
+          />
+        </div>
         {AuthNav.map((item: any, i: any) => (
           <Link key={i} to={item.path} className={` font-semibold  text-base `}>
             <div
@@ -119,39 +133,40 @@ function SideNav() {
           Add new Admin
         </div>
 
+        {/* Add admnin */}
+
         {isOpen && (
           <CustomModal header="Admin" setIsOpen={setIsOpen}>
             <form onSubmit={formik.handleSubmit}>
               <div className=" text-left mb-5">
-                <Label> Username </Label>
+                <Label> UserName </Label>
                 <Input
-                  placeholder="Username"
+                  placeholder="UserName"
                   type="text"
-                  name="username"
-                  value={formik.values.username}
+                  name="userName"
+                  value={formik.values.userName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.touched.username && formik.errors.username && (
+                {formik.touched.userName && formik.errors.userName && (
                   <p className={"text-xs text-red-500"}>
-                    {formik.errors.username}
+                    {formik.errors.userName}
                   </p>
                 )}
               </div>
               <div className=" text-left mb-5">
-                <Label> Fullname </Label>
+                <Label> FullName </Label>
                 <Input
-                  placeholder="Fullname"
-                  name="fullname"
+                  placeholder="FullName"
+                  name="fullName"
                   type="text"
-
-                  value={formik.values.fullname}
+                  value={formik.values.fullName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.touched.fullname && formik.errors.fullname && (
+                {formik.touched.fullName && formik.errors.fullName && (
                   <p className={"text-xs text-red-500"}>
-                    {formik.errors.fullname}
+                    {formik.errors.fullName}
                   </p>
                 )}
               </div>
@@ -177,7 +192,6 @@ function SideNav() {
                 <Input
                   placeholder="Role"
                   name="role"
-
                   type="text"
                   value={formik.values.role}
                   onChange={formik.handleChange}
@@ -210,7 +224,6 @@ function SideNav() {
               >
                 Add Admin
               </button>
-              
             </form>
           </CustomModal>
         )}

@@ -57,7 +57,7 @@ function Notification() {
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: 'Notification added successdully',
+          text: 'Notification added successfully',
           showCancelButton: true,
           showConfirmButton: false,
         });
@@ -134,6 +134,7 @@ function Notification() {
               key={i}
               createdAt={dayjs(item.createdAt).format("DD.MM.YYYY; HH:MM")}
               onClick={()=>handleDelete(item._id)}
+              showDeleteBtn
             />
 
           </>

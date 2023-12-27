@@ -6,8 +6,9 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import NotificationCard from "../../../../components/notificationCard/NotificationCard";
 import AppTable from "./../../../../components/appTable/AppTable";
-import config from '../../../../config.json'
-import http from '../../../../services/httpService'
+import config from "../../../../config.json";
+import http from "../../../../services/httpService";
+import Loader from "../../../../components/Loader/loader";
 
 type ValuePiece = Date | null;
 
@@ -15,17 +16,32 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 function Dashboard() {
   const [dateValue, setDateValue] = useState<Value>(new Date());
-  const [admin , setAdmin] = useState([])
+  const [admin, setAdmin] = useState([]);
+  const [notify, setNotify] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
 
-  useEffect(()=>{
-    const getData = async()=>{
-        const {data} = await http.get(`${config.apiUrl}/users`)
-        setAdmin(data);
-        
-    }
-    getData()
-  },[])
-  
+  useEffect(() => {
+    const getData = async () => {
+      setIsFetching(true);
+      try {
+        const { data } = await http.get(`${config.apiUrl}/notifications`);
+        setNotify(data);
+        // console.log(data);
+        setIsFetching(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getData();
+  }, []);
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await http.get(`${config.apiUrl}/users`);
+      setAdmin(data);
+    };
+    getData();
+  }, []);
 
   // const tableData = [
   //   {
@@ -57,35 +73,6 @@ function Dashboard() {
     ,
   ];
 
-  const notifications = [
-    {
-      title: " Registration for winter semeester starts",
-      body: `   Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde vel sint
-      aliquid dolorem in? Id, a. Aliquam, iure magni. Aliquam quasi nemo
-      consectetur laudantium, inventore iusto voluptatibus officia, vitae
-      voluptatum necessitatibus quo. Facere culpa alias vitae sint similique
-      hic ipsa?`,
-      latest: true,
-    },
-    {
-      title: " Registration for winter semeester starts",
-      body: `   Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde vel sint
-      aliquid dolorem in? Id, a. Aliquam, iure magni. Aliquam quasi nemo
-      consectetur laudantium, inventore iusto voluptatibus officia, vitae
-      voluptatum necessitatibus quo. Facere culpa alias vitae sint similique
-      hic ipsa?`,
-      latest: false,
-    },
-    {
-      title: " Registration for winter semeester starts",
-      body: `   Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde vel sint
-      aliquid dolorem in? Id, a. Aliquam, iure magni. Aliquam quasi nemo
-      consectetur laudantium, inventore iusto voluptatibus officia, vitae
-      voluptatum necessitatibus quo. Facere culpa alias vitae sint similique
-      hic ipsa?`,
-      latest: false,
-    },
-  ];
   const cardData = [
     {
       icon: <FaUser size={25} />,
@@ -136,12 +123,14 @@ function Dashboard() {
 
       <section className="lg:grid grid-cols-3 gap-10 py-8">
         <div className=" col-span-2 bg-white p-5 rounded-md shadow-md">
+      {isFetching && <Loader />}
+       
           <p className="#161E03 text-xl font-semibold mb-5 ">Notification</p>
-          {notifications.map((item: any, i: number) => (
+          {notify.slice(0, 3).map((item: any, i: number) => (
             <NotificationCard
               title={item.title}
               notification={item.body}
-              latest={item.latest}
+              latest={i === 0}
               key={i}
             />
           ))}
