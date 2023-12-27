@@ -25,6 +25,7 @@ function User() {
             <Route path="/packages/:id" element={<Packages />} />
             <Route path="/applicants" element={<Applicants />} />
             <Route path="/notifications" element={< Notification />} />
+            {/* <Route path="/notifications/:id" element={< Notification />} /> */}
             <Route path="/" element={<Dashboard />} />
           </Routes>
         </div>

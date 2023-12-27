@@ -9,6 +9,7 @@ import http from "../../../../services/httpService";
 // import { Dayjs } from "dayjs";
 import { default as dayjs } from "dayjs";
 import Loader from "../../../../components/Loader/loader";
+import Swal from "sweetalert2";
 
 function Notification() {
   const [notify, setNotify] = useState([]);
@@ -20,7 +21,7 @@ function Notification() {
       try {
         const { data } = await http.get(`${config.apiUrl}/notifications`);
         setNotify(data);
-        console.log(data);
+        // console.log(data);
         setIsFetching(false);
       } catch (error) {
         console.log(error);
@@ -30,29 +31,62 @@ function Notification() {
     getData();
   }, []);
 
+
+
   const validateNotification = () => {
     return Yup.object({
       title: Yup.string().required(" title is required"),
-      notification: Yup.string().required("  Notification is required"),
+      body: Yup.string().required("  Notification is required"),
     });
   };
 
   const formik = useFormik({
     initialValues: {
       title: "",
-      notification: "",
-      date: Date.now(),
+      body: "",
+
     },
 
     validationSchema: validateNotification(),
 
-    onSubmit: (values) => {
+    onSubmit: async(values) => {
       console.log(values);
 
-      // @ts-ignore
-      //   formik.handleReset();
+      try {
+        await http.post(`${config.apiUrl}/notifications`, values)
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: 'Notification added successdully',
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+      } catch (error:any) {
+
+        console.log(error.response);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response?.data || "Something Failed",
+          showCancelButton: true,
+          showConfirmButton: false,
+        });
+        
+        
+        
+      }
+   
     },
   });
+
+  const handleDelete= async(id:any)=>{
+    console.log('delete clicked', id);
+
+    await http.delete(`${config.apiUrl}/notifications/${id}`)
+    const updatesNotify= notify.filter((item:any)=>item.id !== id)
+    setNotify(updatesNotify)
+    alert('deletered')
+  }
 
   return (
     <div>
@@ -75,14 +109,14 @@ function Notification() {
           <Label>title</Label>
           {/* < Text/> */}
           <TextArea
-            name="notification"
-            value={formik.values.notification}
+            name="body"
+            value={formik.values.body}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           ></TextArea>
-          {formik.touched.notification && formik.errors.notification && (
+          {formik.touched.body && formik.errors.body && (
             <p className={"text-xs text-red-500"}>
-              {formik.errors.notification}
+              {formik.errors.body}
             </p>
           )}
         </div>
@@ -99,9 +133,9 @@ function Notification() {
               latest={i === 0}
               key={i}
               createdAt={dayjs(item.createdAt).format("DD.MM.YYYY; HH:MM")}
+              onClick={()=>handleDelete(item._id)}
             />
 
-            {console.log(item.createdAt)}
           </>
         ))}
       </div>
