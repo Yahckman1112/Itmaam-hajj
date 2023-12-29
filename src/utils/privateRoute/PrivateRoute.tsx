@@ -1,8 +1,13 @@
 
 import { Navigate, Outlet } from 'react-router-dom'
+import UserContext from '../../context/UserContext';
+import { useContext } from 'react';
+
+
 
 function PrivateRoute() {
-    const user= true
+    
+    const user = useContext(UserContext)
 
   return (
     <div>

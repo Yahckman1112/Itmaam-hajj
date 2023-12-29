@@ -7,12 +7,14 @@ import Register from "../pages/register/Register";
 import Contact from "../pages/contact/Contact";
 import Admin from "../pages/admin/Admin";
 import User from "../pages/user/User";
+import Logout from "../pages/logout/Logout";
 
 function Router() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/logout" element={<Logout />} />
         {/* <Route path="/admin/*" element={ <Admin /> } /> */}
         
         <Route path={'/user/*'} element={<User />} />

@@ -13,17 +13,20 @@ import { jwtDecode } from "jwt-decode";
 
 function User() {
   const [currentUSer, setCurrentUSer]= useState<any>(null)
+  // console.log(currentUSer);
   
   useEffect(()=>{
     const jwt:any = localStorage.getItem("token")
-    const user = jwtDecode(jwt)
-    // console.log(user);
-    setCurrentUSer(user)
+    if (jwt) {
+      const user = jwtDecode(jwt);
+      console.log("Decoded User:", user); 
+      setCurrentUSer(user);
+    }
     
-  })
+  },[])
   return (
     <>
-    < UserContext.Provider value={'lovey'}>
+    < UserContext.Provider value={{currentUSer}}>
       <AuthHeader />
       <div className="lg:flex h-screen ">
         <div className=" w-64 mr-4 hidden lg:block">
@@ -32,7 +35,7 @@ function User() {
 
         <div className="max-h-screen overflow-y-scroll flex-1 p-6 bg-[#FCFFF5]">
           <Routes>
-            <Route element={<PrivateRoute />}>
+            <Route element={<PrivateRoute  />}>
               <Route path="/packages" element={<Packages />} />
               <Route path="/packages/:id" element={<Packages />} />
               <Route path="/applicants" element={<Applicants />} />

@@ -1,6 +1,11 @@
 import React from 'react'
 
-const UserContext= React.createContext<unknown | null>( null)
+interface UserContextProps {
+    currentUSer: any | null;
+  }
+  
+
+const UserContext= React.createContext<UserContextProps  | null>( null)
 
 UserContext.displayName = 'UserContext'
 

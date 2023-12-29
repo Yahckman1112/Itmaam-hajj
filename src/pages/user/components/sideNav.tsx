@@ -117,7 +117,7 @@ function SideNav() {
           <div className="mr-2 mb-16">
             <CiLogout size={20} />
           </div>
-          <div> Logout</div>
+          <Link to={'/logout'}> Logout</Link>
         </div>
       </div>
       <div className="  mx-2 p-5 text-center border border-dashed border-[#7C7C7A] min-h-[100px]">
