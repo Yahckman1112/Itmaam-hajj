@@ -14,7 +14,7 @@ function Router() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/admin/*" element={ <Admin /> } /> */}
-
+        
         <Route path={'/user/*'} element={<User />} />
         <Route path={ABOUT} element={<About />} />
         <Route path={PACKAGES} element={<Packages />} />

@@ -4,11 +4,14 @@ import { LoginInput } from "./admin.style";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
-// import http from "../../services/httpService";
+import http from "../../services/httpService";
+import config from '../../config.json'
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 function Admin() {
+  const [isLoading, setIsLoading]= useState<boolean>(false)
   const navigate = useNavigate()
   const loginValidate = () => {
     return Yup.object({
@@ -26,26 +29,12 @@ function Admin() {
 
     onSubmit: async (values) => {
       try {
-        // console.log(values);
-        // const { data: jwt } = await http.post(
-        //   "http://localhost:5000/api/auth",
-        //   values
-        // );
-        // localStorage.setItem("token", jwt);
-        // console.log(jwt);
-
-        // Swal.fire({
-        //   icon: "success",
-        //   title: "Successful",
-        //   text: "Loged in successfully",
-        //   showCancelButton: true,
-        //   showConfirmButton: false,
-        // });
-console.log(values);
-
+setIsLoading(true)
+const {data:jwt} = await http.post(`${config.apiUrl}/auth`,values)
+       localStorage.setItem("token",jwt)
         navigate('/user')
 
-        
+        setIsLoading(false)
       } catch (error:any) {
         console.log(error);
         
@@ -56,6 +45,8 @@ console.log(values);
           showCancelButton: true,
           showConfirmButton: false,
         });
+        setIsLoading(false)
+
       }
     },
   });
@@ -108,8 +99,8 @@ console.log(values);
           <button
             type="submit"
             className="w-full mt-5 py-3 bg-[#1A8F4A] shadow-sm rounded-sm text-[#FCFCFC] font-semibold text-base "
-          >
-            Login
+          >{isLoading? 'Authenticating.....':'Login'}
+            
           </button>
         </form>
       </LoginContainer>
